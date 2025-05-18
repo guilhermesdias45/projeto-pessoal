@@ -29,7 +29,7 @@
           <li>
             <button onclick="Exibir()"><img src="assets/icon/icon-login.png" style="display: block; width: 50px;" alt=""></button>
             <div id="div_escondida" style="display: none; position: absolute;">
-              <a href="">Perfil</a><br>
+              <button onclick="testeLogin()">Perfil</button>
               <a href="">Jogos</a><br>
               <a href="">Sair</a><br>
             </div>
@@ -40,20 +40,32 @@
   
     <div class="banner">
       <div class="container">
+        <!-- <img src="assets/imgs/jogos.jpg" alt=""> -->
       </div>
     </div>
   
     <div class="social">
       <div class="container">
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam tenetur dolorum voluptatem aliquid, aliquam amet facilis error eius quas officia sit, nemo recusandae voluptates consequuntur praesentium nulla doloremque assumenda ratione.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt eum voluptatum ad repellendus pariatur quis, eius, placeat saepe voluptate aliquid quisquam cum illum magnam debitis optio labore reiciendis consequuntur autem.</p>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis ratione, at pariatur earum consequuntur repellendus suscipit dolor adipisci vero totam ut voluptatum sit? Iusto iste maiores ducimus, dolores vitae doloribus.</p>
+      </div>
+    </div>
+    <div class="social">
+      <div class="container">
+        <img src="assets/imgs/jogos.jpg" width="500px">
+        <p style="width: 50%;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas suscipit eos laboriosam quibusdam doloremque quaerat consequatur ipsa nihil nobis libero! Saepe quos repellendus aspernatur modi odio id culpa explicabo beatae!
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Assumenda aperiam neque est animi cum reiciendis mollitia a ipsa ratione, nihil magni, pariatur tempore ducimus recusandae non quasi id incidunt architecto.
+        </p>
       </div>
     </div>
   
-    <!-- <div class="footer">
+    <div class="footer">
       <div class="container">
         <h4></h4>
         <span class="version">v1.0.0</span>
       </div>
-    </div> -->
+    </div>
   </body>
 
 </html>
@@ -64,6 +76,14 @@
       div_escondida.style.display = "block";
     } else{
       div_escondida.style.display = "none";
+    }
+  }
+
+  function testeLogin(){
+    if(sessionStorage.ID_USUARIO == null){
+      window.location = "login.html";
+    } else{
+      window.location = "perfil.html";
     }
   }
 </script>

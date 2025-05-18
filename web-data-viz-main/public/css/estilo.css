@@ -66,6 +66,7 @@ body {
 .banner {
   height: var(--tamanho-banner);
   color: white;
+  background-image: url("/public/assets/imgs/jogos.jpg");
   background-color: - var(--cor-tela);
   background-size: cover;
 }
@@ -306,7 +307,7 @@ input {
 /* SIMULADOR */
 
 .simulador {
-  color: white;
+  color: black;
 }
 
 .simulador .container {
