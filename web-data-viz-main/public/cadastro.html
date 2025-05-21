@@ -189,12 +189,12 @@
 
   // Listando empresas cadastradas 
   function listar() {
-    fetch("/empresas/listar", {
+    fetch("/usuarios/listar", {
       method: "GET",
     })
       .then(function (resposta) {
         resposta.json().then((conta) => {
-          empresas.forEach((conta) => {
+          usuarios.forEach((conta) => {
             ContasCadastradas.push(conta);
 
             console.log("ContasCadastradas")

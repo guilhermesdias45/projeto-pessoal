@@ -13,7 +13,7 @@ router.post("/autenticar", function (req, res) {
 });
 
 router.get("/listar", function (req, res) {
-  empresaController.listar(req, res);
+    usuarioController.listar(req, res);
 });
 
 module.exports = router;
