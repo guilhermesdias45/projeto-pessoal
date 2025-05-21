@@ -69,21 +69,4 @@
   </body>
 
 </html>
-<script>
-  function Exibir(){
-
-    if(div_escondida.style.display == "none"){
-      div_escondida.style.display = "block";
-    } else{
-      div_escondida.style.display = "none";
-    }
-  }
-
-  function testeLogin(){
-    if(sessionStorage.ID_USUARIO == null){
-      window.location = "login.html";
-    } else{
-      window.location = "perfil.html";
-    }
-  }
-</script>
+<script src="js/redirecionamento.js"></script>
