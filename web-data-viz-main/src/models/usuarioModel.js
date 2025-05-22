@@ -23,13 +23,22 @@ function cadastrar(nome, email, senha, username) {
 }
 
 function listar() {
-  var instrucaoSql = `SELECT idUsuario, nome, username, email FROM Usuario`;
+    var instrucaoSql = `SELECT idUsuario, nome, username, email FROM Usuario`;
 
-  return database.executar(instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function verificarAmizade(idUsuario1, idUsuario2){
+    console.log("Estou testando a função de verificar amizade!")
+
+    var instrucaoSql = `SELECT * FROM Amizade WHERE idUsuario1 = ${idUsuario1} AND idUsuario2 = ${idUsuario2}`;
+
+    return database.executar(instrucaoSql);
 }
 
 module.exports = {
     autenticar,
     cadastrar,
+    verificarAmizade,
     listar
 };
