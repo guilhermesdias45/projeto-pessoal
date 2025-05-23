@@ -1,14 +1,23 @@
 CREATE DATABASE projeto_pessoal;
 USE projeto_pessoal;
 
+CREATE TABLE Categoria (
+	idCategoria INT AUTO_INCREMENT,
+    nome VARCHAR(40) NOT NULL,
+    descricao VARCHAR(100) NOT NULL,
+    PRIMARY KEY (idCategoria)
+);
+
 CREATE TABLE Usuario (
   idUsuario INT NOT NULL AUTO_INCREMENT,
   nome VARCHAR(60) NOT NULL,
   username Varchar(30) NOT NULL,
   email VARCHAR(45) NOT NULL,
   senha VARCHAR(25) NOT NULL,
+  categoria_favorita int NOT NULL,
   fkGuilda INT NULL,
-  PRIMARY KEY (idUsuario));
+  PRIMARY KEY (idUsuario),
+  FOREIGN KEY (categoria_favorita) REFERENCES Categoria(idCategoria));
 
 CREATE TABLE Guilda (
   idGuilda INT NOT NULL AUTO_INCREMENT,
@@ -27,27 +36,38 @@ CREATE TABLE Amizade (
   FOREIGN KEY (idUsuario1) REFERENCES Usuario (idUsuario),
   FOREIGN KEY (idUsuario2) REFERENCES Usuario (idUsuario));
 
-CREATE TABLE Jogos (
-  idJogos INT NOT NULL,
+CREATE TABLE Jogo (
+  idJogo INT NOT NULL,
   nome VARCHAR(45) NULL,
-  link VARCHAR(45) NULL,
-  PRIMARY KEY (idJogos));
+  fkCategoria INT NOT NULL,
+  link VARCHAR(150) NULL,
+  PRIMARY KEY (idJogo),
+  FOREIGN KEY (fkCategoria) REFERENCES Categoria (idCategoria)
+);
 
-CREATE TABLE historico_jogos (
+CREATE TABLE Historico_Jogo (
   fkUsuario INT NOT NULL,
-  fkJogos INT NOT NULL,
+  fkJogo INT NOT NULL,
   data_hora VARCHAR(45) NOT NULL,
   pontuacao VARCHAR(45) NOT NULL,
-  PRIMARY KEY (fkUsuario, fkJogos),
+  PRIMARY KEY (fkUsuario, fkJogo),
   FOREIGN KEY (fkUsuario) REFERENCES Usuario (idUsuario),
-  FOREIGN KEY (fkJogos) REFERENCES Jogos (idJogos));
+  FOREIGN KEY (fkJogo) REFERENCES Jogo (idJogo));
 
 ALTER TABLE Usuario ADD FOREIGN KEY (fkGuilda) REFERENCES Guilda (idGuilda);
 
-INSERT INTO Usuario (nome, username, email, senha, fkGuilda) VALUES
-('Ana Silva', 'anas', 'ana@email.com', '123senha', NULL),
-('Bruno Costa', 'brunoc', 'bruno@email.com', 'abc123', NULL),
-('Carla Mendes', 'carlam', 'carla@email.com', 'passcarla', NULL);
+INSERT INTO Categoria (nome, descricao) VALUES
+("RPG", "Jogos de RPG"),
+("Ação", "Jogos de Ação"),
+("Aventura", "Jogos de Aventura"),
+("Estratégia", "Jogos de Estratégia"),
+("Simulação", "Jogos de Simulação"),
+("Esportes", "Jogos de Esportes");
+
+INSERT INTO Usuario (nome, username, email, senha, fkGuilda, categoria_favorita) VALUES
+('Ana Silva', 'anas', 'ana@email.com', '123senha', NULL, 1),
+('Bruno Costa', 'brunoc', 'bruno@email.com', 'abc123', NULL, 2),
+('Carla Mendes', 'carlam', 'carla@email.com', 'passcarla', NULL, 3);
 
 INSERT INTO Guilda (nome, descricao, lider) VALUES
 ('Guilda dos Dragões', 'Especialistas em PvP', 1),
@@ -63,12 +83,14 @@ INSERT INTO Amizade (idUsuario1, idUsuario2, usuario1Amizade, usuario2Amizade) V
 (1, 3, 1, 0),
 (2, 3, 1, 1);
 
-INSERT INTO Jogos (idJogos, nome, link) VALUES
-(1, 'BattleQuest', 'https://bq.com'),
-(2, 'CodeRun', 'https://coderun.io'),
-(3, 'Floresta Mística', 'https://florestamistica.net');
+select * from Usuario;
 
-INSERT INTO historico_jogos (fkUsuario, fkJogos, data_hora, pontuacao) VALUES
+INSERT INTO Jogo (idJogo, nome, link, fkCategoria) VALUES
+(1, 'BattleQuest', 'https://bq.com', 1),
+(2, 'CodeRun', 'https://coderun.io', 2),
+(3, 'Floresta Mística', 'https://florestamistica.net', 3);
+
+INSERT INTO Historico_Jogo (fkUsuario, fkJogo, data_hora, pontuacao) VALUES
 (1, 1, '2025-05-17 15:00', '8500'),
 (1, 2, '2025-05-17 17:30', '7300'),
 (2, 1, '2025-05-16 14:20', '9100'),
