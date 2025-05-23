@@ -307,6 +307,10 @@ input {
 
 .simulador {
   color: black;
+  display: flex;
+  justify-content: center;
+    align-items: center;
+    min-height: 60vh;
 }
 
 .simulador .container {
@@ -360,4 +364,13 @@ input {
   50%  {transform: rotate(25deg)}
   75%  {transform: rotate(-25deg)}
   100% {transform: rotate(25deg)}
+}
+
+.teste_perfil_container{
+    display: flex;
+    flex-direction: row !important;
+    justify-content: space-between;
+    margin: auto;
+    width: 45%;
+    height: var(--tamanho-simulador);
 }

@@ -29,6 +29,27 @@
 <!-- <body onload=" atualizarFeed()"> -->
 
 <body>
+    <div class="header">
+        <div class="container">
+          <h1 class="titulo">SPTech Games</h1>
+          <ul class="navbar">
+            <li class="agora">
+              <a href="#">Inicial</a>
+            </li>
+            <li>
+              <a href="simulador.html">Simulador</a>
+            </li>
+            <li>
+              <button onclick="Exibir()"><img src="assets/icon/icon-login.png" style="display: block; width: 50px;" alt=""></button>
+              <div id="div_escondida" style="display: none; position: absolute;">
+                <button onclick="testeLogin()">Perfil</button>
+                <a href="">Jogos</a><br>
+                <a href="">Sair</a><br>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
 
     <div class="janela">
         <div class="header-left">
@@ -66,7 +87,7 @@
             <div id="alerta">
             </div>
 
-            <div class="btns-dash" id="btnAquario">
+            <div class="btns-dash" id="btnDashboard">
                 <!-- O gráfico é chamado de acordo com o id (fk_aquario) do banco  -->
             </div>
             <div id="graficos">
@@ -89,8 +110,8 @@
     function exibirAquariosDoUsuario() {
         var aquarios = JSON.parse(sessionStorage.AQUARIOS);
         aquarios.forEach(item => {
-            document.getElementById("btnAquario").innerHTML += `
-            <button class="btn-chart" onclick="exibirAquario(${item.id})" id="btnAquario${item.id}">${item.descricao}</button>
+            document.getElementById("btnDashboard").innerHTML += `
+            <button class="btn-chart" onclick="exibirAquario(${item.id})" id="btnDashboard${item.id}">${item.descricao}</button>
             `
 
             document.getElementById("graficos").innerHTML += `
@@ -134,7 +155,7 @@
                 elementoAtual.classList.add("display-none")
 
                 // alterando estilo do botão
-                let btnAtual = document.getElementById(`btnAquario${todosOsGraficos[i].id}`)
+                let btnAtual = document.getElementById(`btnDashboard${todosOsGraficos[i].id}`)
                 if (btnAtual.classList.contains("btn-pink")) {
                     btnAtual.classList.remove("btn-pink")
                 }
@@ -148,7 +169,7 @@
         graficoExibir.classList.add("display-block")
 
         // alterando estilo do botão
-        let btnExibir = document.getElementById(`btnAquario${idAquario}`)
+        let btnExibir = document.getElementById(`btnDashboard${idAquario}`)
         btnExibir.classList.remove("btn-white")
         btnExibir.classList.add("btn-pink")
     }

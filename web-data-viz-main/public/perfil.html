@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 
-<body>
+<body onload="buscarInformacoes()">
 
     <!--header inicio-->
     <div class="header">
@@ -26,7 +26,7 @@
             <a href="index.html">Inicial</a>
           </li>
           <li>
-            <a href="#">Simulador</a>
+            <a href="simulador.html">Simulador</a>
           </li>
           <li>
             <button onclick="Exibir()"><img src="assets/icon/icon-login.png" style="display: block; width: 50px;" alt=""></button>
@@ -43,23 +43,22 @@
 
     <!-- simulador inicio -->
     <div class="simulador">
-        <div class="container">
+        <div class="teste_perfil_container">
+          <div>
             <h2>Perfil</h2>
-            <p>Nome: <span id="nome">nome</span></p>
-            <p>Username: <span id="username">apelido</span></p>
-            <p>Categorias: <span>categorias</span></p>
-            <p>Jogos: <span>jogos</span></p>
-            <div>
-              <p>Melhores pontuações: <span>historico</span></p>
+            <p>Nome: <br><span id="nome">nome</span></p>
+            <p>Username: <br><span id="username">apelido</span></p>
+            <p>Sobre mim: <br><span>Digitei alguma coisa</span></p>
+            <p>Jogos: <br><span>jogos</span></p>
+            <p>Melhores pontuações: <span>historico</span></p>
+          </div>
+            <div style="margin-top: 40px;">
+              <button>Adicionar usuário</button>
+              <button>Enviar mensagem</button>
             </div>
-
         </div>
     </div>
 
-    <div>
-      <button>Adicionar usuário</button>
-      <button>Enviar mensagem</button>
-    </div>
     <!-- simulador fim -->
 
     <!--footer inicio-->

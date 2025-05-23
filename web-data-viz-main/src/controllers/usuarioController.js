@@ -13,8 +13,6 @@ function autenticar(req, res) {
         res.status(400).send("Sua senha está indefinida!");
     } else {
 
-        console.log("Acessando o else para autenticar!");
-
         usuarioModel.autenticar(email, senha)
             .then(
                 function (resultadoAutenticar) {
@@ -26,11 +24,12 @@ function autenticar(req, res) {
                         
                             if (resultadoAutenticar.length == 1) {
                                 res.json({
-                                    id: resultadoAutenticar[0].idUsuario,
+                                    idUsuario: resultadoAutenticar[0].idUsuario,
                                     email: resultadoAutenticar[0].email,
                                     nome: resultadoAutenticar[0].nome,
                                     senha: resultadoAutenticar[0].senha,
-                                    username: resultadoAutenticar[0].username
+                                    username: resultadoAutenticar[0].username,
+                                    categorias: resultadoAutenticar[0]
                                 });
                             } else {
                                 res.status(204).json();
