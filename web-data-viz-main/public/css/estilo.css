@@ -371,6 +371,7 @@ input {
     flex-direction: row !important;
     justify-content: space-between;
     margin: auto;
-    width: 45%;
+    width: 70%;
+    background-color: beige;
     height: var(--tamanho-simulador);
 }

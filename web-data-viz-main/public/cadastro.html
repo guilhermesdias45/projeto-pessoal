@@ -67,6 +67,15 @@
             <input id="email_input" type="text" placeholder="meuemail@provedor.com" />
           </div>
           <div class="campo">
+            <span>Categoria Favorita:</span>
+            <select name="Categorias" id="categoria_input">
+              <option value="#">Escolher</option>
+              <option value="1">Ação</option>
+              <option value="2">Aventura</option>
+              <option value="3">RPG</option>
+            </select>
+          </div>
+          <div class="campo">
             <span>Senha:</span>
             <input id="senha_input" type="password" placeholder="******" />
           </div>
@@ -88,7 +97,7 @@
   <!--footer inicio-->
   <div class="footer">
     <div class="container">
-      <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
+      <h4>Feito por Guilherme Santos 1CCOA &copy; 2025</h4>
       <span class="version">v1.0.0</span>
     </div>
   </div>
@@ -103,7 +112,7 @@
   let ContasCadastradas = [];
 
   function cadastrar() {
-    // aguardar();
+    aguardar();
 
     //Recupere o valor da nova input pelo nome do id
     // Agora vá para o método fetch logo abaixo
@@ -112,6 +121,7 @@
     var senhaVar = senha_input.value;
     var confirmacaoSenhaVar = confirmacao_senha_input.value;
     var usernameVar = username_input.value;
+    var categoriaVar = Number(categoria_input.value);
 
     // Verificando se há algum campo em branco
     if (
@@ -119,7 +129,8 @@
       emailVar == "" ||
       senhaVar == "" ||
       confirmacaoSenhaVar == "" ||
-      usernameVar == ""
+      usernameVar == "" ||
+      categoriaVar == "#"
     ) {
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
@@ -136,11 +147,20 @@
       if (ContasCadastradas[i].username == usernameVar) {
         console.log("Nome de usuário já existente");
         cardErro.style.display = "block";
+        mensagem_erro.innerHTML = `Nome de usuário já existente!`;
         finalizarAguardar();
+        break;
       } else {
         console.log("Nome de usuário não existente, permitido cadastrar");
-        mensagem_erro.innerHTML = "Nome de usuário não existente, permitido cadastrar";
+      }
+      if (ContasCadastradas[i].email == emailVar) {
+        console.log("Email já existente");
+        cardErro.style.display = "block";
+        mensagem_erro.innerHTML = `E-mail já cadastrado!`;
+        finalizarAguardar();
         break;
+      } else {
+        console.log("Email não existente, permitido cadastrar");
       }
     }
 
@@ -156,7 +176,8 @@
         nomeServer: nomeVar,
         emailServer: emailVar,
         senhaServer: senhaVar,
-        usernameServer: usernameVar
+        usernameServer: usernameVar,
+        categoriaServer: categoriaVar
       }),
     })
       .then(function (resposta) {
@@ -193,11 +214,14 @@
     })
       .then(function (resposta) {
         resposta.json().then((usuarios) => {
+          let i = 0;
           usuarios.forEach((conta) => {
             ContasCadastradas.push(conta);
 
             console.log("ContasCadastradas")
-            console.log(ContasCadastradas[0].username)
+            console.log(ContasCadastradas[i].username);
+            console.log(ContasCadastradas[i].email);
+            i++;
           });
         });
       })
