@@ -1,16 +1,17 @@
+if (sessionStorage.NOME_USUARIO != undefined) {
+  b_usuario.innerHTML = sessionStorage.NOME_USUARIO;
+}
+
 function Exibir() {
   if (div_escondida.style.display == "none") {
     div_escondida.style.display = "block";
+    pagina.style.width = "80%";
   } else {
     div_escondida.style.display = "none";
+    pagina.style.width = "100%";
   }
 }
 
 function testeLogin() {
   window.location = "cadastro.html";
-  //   if(sessionStorage.ID_USUARIO == null){
-  //     window.location = "login.html";
-  //   } else{
-  //     window.location = "perfil.html";
-  //   }
 }

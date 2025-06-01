@@ -2,21 +2,21 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>SPTech Games | Página Inicial</title>
+  <title>SPTech Games | Página Inicial</title>
 
-    <script src="./js/sessao.js"></script>
+  <script src="./js/sessao.js"></script>
 
-    <link rel="stylesheet" href="./css/estilo.css">
-    <link rel="icon" href="./assets/icon/favicon2.ico">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="stylesheet" href="./css/estilo.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 
 <body>
-  
+  <div id="pagina">
+
     <!-- HEADER  -->
     <div class="header">
       <div class="container">
@@ -29,48 +29,103 @@
             <a href="simulador.html">Simulador</a>
           </li>
           <li>
-            <button onclick="Exibir()"><img src="assets/icon/icon-login.png" style="display: block; width: 50px;" alt=""></button>
-            <div id="div_escondida" style="display: none; position: absolute;">
-              <button onclick="testeLogin()">Perfil</button>
-              <a href="">Jogos</a><br>
-              <a href="">Sair</a><br>
-            </div>
+            <a href="#" onclick="Exibir()"><img src="assets/imgs/hamburguer-icone.png"
+                style="display: block; width: 50px;" alt=""></a>
           </li>
         </ul>
       </div>
+
+      <div id="div_escondida" style="display: none;">
+        <div class="janela">
+          <div class="header-left">
+
+            <div class="hello">
+              <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+            </div>
+
+            <div class="btn-nav-white">
+              <a href="cadastro.html">
+                <h3>Cadastrar</h3>
+              </a>
+            </div>
+
+            <div class="btn-nav-white">
+              <a href="login.html">
+                <h3>Login</h3>
+            </div>
+
+            <div class="btn-nav-white">
+              <a href="simulador.html">
+                <h3>Simulador</h3>
+              </a>
+            </div>
+
+            <div class="btn-logout" onclick="limparSessao()">
+              <h3>Sair</h3>
+            </div>
+
+          </div>
+        </div>
+      </div>
     </div>
+
     <!-- HEADER  -->
-  
+
     <div class="banner">
       <div class="container">
         <!-- <img src="assets/imgs/jogos.jpg" alt=""> -->
       </div>
     </div>
-    
-  
+
+
     <div class="social">
       <div class="container">
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam tenetur dolorum voluptatem aliquid, aliquam amet facilis error eius quas officia sit, nemo recusandae voluptates consequuntur praesentium nulla doloremque assumenda ratione.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt eum voluptatum ad repellendus pariatur quis, eius, placeat saepe voluptate aliquid quisquam cum illum magnam debitis optio labore reiciendis consequuntur autem.</p>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis ratione, at pariatur earum consequuntur repellendus suscipit dolor adipisci vero totam ut voluptatum sit? Iusto iste maiores ducimus, dolores vitae doloribus.</p>
+        <div>
+          <h4>Missão:</h4>
+          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam tenetur dolorum voluptatem aliquid,
+            aliquam
+            amet facilis error eius quas officia sit, nemo recusandae voluptates consequuntur praesentium nulla
+            doloremque
+            assumenda ratione.</p>
+        </div>
+        <div>
+          <h4>Visão:</h4>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt eum voluptatum ad repellendus pariatur quis,
+            eius, placeat saepe voluptate aliquid quisquam cum illum magnam debitis optio labore reiciendis consequuntur
+            autem.</p>
+        </div>
+        <div>
+          <h4>Valores:</h4>
+          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis ratione, at pariatur earum consequuntur
+            repellendus suscipit dolor adipisci vero totam ut voluptatum sit? Iusto iste maiores ducimus, dolores vitae
+            doloribus.</p>
+        </div>
       </div>
     </div>
+
+
     <div class="social">
       <div class="container">
         <img src="assets/imgs/jogos.jpg" width="500px">
-        <p style="width: 50%;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas suscipit eos laboriosam quibusdam doloremque quaerat consequatur ipsa nihil nobis libero! Saepe quos repellendus aspernatur modi odio id culpa explicabo beatae!
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Assumenda aperiam neque est animi cum reiciendis mollitia a ipsa ratione, nihil magni, pariatur tempore ducimus recusandae non quasi id incidunt architecto.
+        <p style="width: 50%;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas suscipit eos
+          laboriosam quibusdam doloremque quaerat consequatur ipsa nihil nobis libero! Saepe quos repellendus aspernatur
+          modi odio id culpa explicabo beatae!
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Assumenda aperiam neque est animi cum reiciendis
+          mollitia a ipsa ratione, nihil magni, pariatur tempore ducimus recusandae non quasi id incidunt architecto.
         </p>
       </div>
     </div>
-  
+
     <div class="footer">
       <div class="container">
-        <h4></h4>
+        <h4>Feito por Guilherme Santos Dias 1CCOA</h4>
         <span class="version">v1.0.0</span>
       </div>
     </div>
-  </body>
+
+  </div>
+
+</body>
 
 </html>
 <script src="js/redirecionamento.js"></script>

@@ -332,26 +332,6 @@ canvas {
   /* width: 100vw; */
 }
 
-.header-left a {
-  text-decoration: none;
-  color: white;
-}
-
-.header-left {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 999;
-  height: 100vh;
-  width: 20%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  border-right: 3px solid #32b9cd;
-  background-color: #212124;
-}
-
 .dash-right {
   display: flex;
   width: 70%;
@@ -362,10 +342,6 @@ canvas {
   left: 25%;
   height: 100vh;
   overflow: auto;
-}
-
-.header-left h1 {
-  color: #32b9cd;
 }
 
 .hello {
