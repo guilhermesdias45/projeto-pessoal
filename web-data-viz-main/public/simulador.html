@@ -93,7 +93,7 @@
           <p>Maior pontuação:</p>
           <p id="p_maior_ponto"></p>
         </div>
-        
+
         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium tempora architecto sint fugit
           dolorum? Ipsum laborum magnam similique labore, voluptate amet reprehenderit rem ab blanditiis quisquam
           laboriosam eaque alias. Reiciendis. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -119,14 +119,12 @@
     </div>
     <!-- simulador fim -->
 
-    <!--footer inicio-->
     <div class="footer">
       <div class="container">
-        <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
+        <h4>Feito por Guilherme Santos Dias 1CCOA</h4>
         <span class="version">v1.0.0</span>
       </div>
     </div>
-    <!--footer fim-->
   </div>
 
 </body>
@@ -159,13 +157,13 @@
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
       });
-    }
+  }
 
-      function gerarDashboard(){
-        
-        const ctxDonut = document.getElementById('donut').getContext('2d');
+  function gerarDashboard() {
 
-        console.log(dataCategoria);
+    const ctxDonut = document.getElementById('donut').getContext('2d');
+
+    console.log(dataCategoria);
 
     let myChart = new Chart(ctxDonut, {
       type: 'doughnut',
@@ -192,9 +190,9 @@
     });
   }
 
-  function plotarGraficoPorCento(){
-    for(let k = 0; k < votosCategoria.length; k++){
-      let porCento = (votosCategoria[k]/ totalVotos) * 100;
+  function plotarGraficoPorCento() {
+    for (let k = 0; k < votosCategoria.length; k++) {
+      let porCento = (votosCategoria[k] / totalVotos) * 100;
       dataCategoria.push(porCento);
     }
   }
