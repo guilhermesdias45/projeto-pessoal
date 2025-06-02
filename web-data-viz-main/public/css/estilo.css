@@ -142,6 +142,7 @@ body {
 /* LOGIN */
 
 .login {
+  display: flex;
   min-height: var(--tamanho-login);
   background-image: url('../assets/imgs/jogos.jpg');
   background-size: cover;
