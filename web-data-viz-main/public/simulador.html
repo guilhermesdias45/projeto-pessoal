@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="./css/estilo.css">
   <link rel="icon" href="./assets/icon/favicon2.ico">
   <link rel="preconnect" href="https://fonts.gstatic.com">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -83,6 +84,9 @@
     <!-- simulador inicio -->
     <div class="simulador">
       <div class="container">
+        <div style="width: 40%;">
+          <canvas id="donut"></canvas>
+        </div>
         <h2>Simulador</h2>
         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium tempora architecto sint fugit
           dolorum? Ipsum laborum magnam similique labore, voluptate amet reprehenderit rem ab blanditiis quisquam
@@ -122,4 +126,50 @@
 </body>
 
 </html>
+<script>
+  function exibirTalhoesDoUsuario() {
+    fetch(`/medidas/tempo-real/${paramId}`, { cache: 'no-store' }).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          resposta.reverse();
+
+          plotarGrafico(resposta, paramId);
+
+        });
+      } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+      }
+    })
+      .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      });
+  }
+
+  const ctxDonut = document.getElementById('donut').getContext('2d');
+
+  new Chart(ctxDonut, {
+    type: 'doughnut',
+    data: {
+      labels: ['Padrão', 'Escassez', 'Excesso'],
+      datasets: [{
+        data: [55, 24, 90, 67],
+        backgroundColor: ['red', 'blue', 'yellow'],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'bottom'
+        },
+        title: {
+          display: true,
+          text: 'Situação dos Sensores'
+        }
+      }
+    }
+  });
+</script>
 <script src="js/redirecionamento.js"></script>
