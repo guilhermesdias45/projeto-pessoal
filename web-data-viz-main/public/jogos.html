@@ -16,16 +16,32 @@
 </head>
 <style>
   .card-jogo {
-        background-color: deepskyblue;
-        width: 29%;
+        background-color: gainsboro;
         padding: 5px;
         margin: 10px;
-        border: black solid 1px;
+        border: gray 3px groove;
+        box-shadow: 2px 2px 3px black;
+        height: 150px;
+        width: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card-jogo a{
+      text-decoration: none;
+      color: black;
     }
 
     .jogos_container{
       display: flex;
       flex-wrap: wrap;
+      justify-content: space-evenly;
+    }
+
+    .container-jogo{
+      flex-direction: column;
+      background-color: beige;
     }
 </style>
 
@@ -95,13 +111,15 @@
 
     <!-- HEADER  -->
 
-    <div class="simulador">
+    <div class="simulador container-jogo">
       <h2>Jogos:</h2>
       <div class="perfil_container jogos_container">
-        <div class="card-jogo"></div>
-        <div class="card-jogo"></div>
-        <div class="card-jogo"></div>
-        <div class="card-jogo"></div>
+        <div class="card-jogo">
+          <h3><a href="minigames/quizz.html">Quizz</a></h3>
+        </div>
+        <div class="card-jogo">
+          <h3><a href="minigames/sudoku.html">Sudoku</a></h3>
+        </div>
       </div>
     </div>
 

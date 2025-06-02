@@ -65,7 +65,7 @@
                         <a href="#">Inicial</a>
                     </li>
                     <li>
-                        <a href="jogos.html">Jogos</a>
+                        <a href="../jogos.html">Jogos</a>
                     </li>
                     <li>
                         <a href="simulador.html">Simulador</a>
@@ -119,11 +119,17 @@
         <!-- HEADER  -->
 
         <div class="container-completo">
-            <h1>apenas um teste</h1>
-            <button onclick="comecar()">Começar Partida</button>
+            <div id="botoes_pre_jogo">
+                <button onclick="comecar()">Começar Partida</button>
+                <button>Ver Regras</button>
+            </div>
             <div id="sudoku_jogo" style="display: none; flex-direction: column">
                 <div id="container_sudoku" style="display: flex;"></div>
                 <div id="opcoes_numero" style="display: flex; margin: 0 auto; width: 414px;"></div>
+                <div>
+                    <button>Desistir</button>
+                    <button>Finalizar</button>
+                </div>
             </div>
         </div>
 
@@ -186,8 +192,9 @@
     }
 
     function comecar() {
-        if (sudoku_jogo.style.display = 'none') {
-            sudoku_jogo.style.display = 'flex'
+        if (sudoku_jogo.style.display == 'none') {
+            sudoku_jogo.style.display = 'flex';
+            botoes_pre_jogo.style.display = 'none';
         } else {
             sudoku_jogo.style.display = 'none'
         }
