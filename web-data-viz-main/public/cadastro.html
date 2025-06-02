@@ -45,15 +45,20 @@
               <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
             </div>
 
-            <div class="btn-nav-white">
+            <div class="btn-nav-white" style="display: block;" id="div_cadastro">
               <a href="cadastro.html">
                 <h3>Cadastrar</h3>
               </a>
             </div>
 
-            <div class="btn-nav-white">
+            <div class="btn-nav-white" style="display: block;" id="div_login">
               <a href="login.html">
                 <h3>Login</h3>
+            </div>
+
+            <div class="btn-nav-white" style="display: none;" id="div_perfil">
+              <a href="perfil.html">
+                <h3>Perfil</h3>
             </div>
 
             <div class="btn-nav-white">
@@ -103,9 +108,24 @@
               <span>Categoria Favorita:</span>
               <select name="Categorias" id="categoria_input">
                 <option value="#">Escolher</option>
-                <option value="1">Ação</option>
-                <option value="2">Aventura</option>
-                <option value="3">RPG</option>
+                <option value="1">RPG</option>
+                <option value="2">Ação</option>
+                <option value="3">Aventura</option>
+                <option value="4">Estratégia</option>
+                <option value="5">Simulação</option>
+                <option value="6">Esportes</option>
+                <option value="7">FPS</option>
+                <option value="8">TPS</option>
+                <option value="9">Plataforma</option>
+                <option value="10">Corrida</option>
+                <option value="11">Luta</option>
+                <option value="12">Sobrevivência</option>
+                <option value="13">MMORPG</option>
+                <option value="14">Battle Royale</option>
+                <option value="15">Sandbox</option>
+                <option value="16">Ritmo</option>
+                <option value="17">Party Games</option>
+                <option value="18">Puzzle</option>
               </select>
             </div>
             <div class="campo">
@@ -145,6 +165,7 @@
 
   // Array para armazenar empresas cadastradas para validação de código de ativação 
   let ContasCadastradas = [];
+  const charEspecial = /[!@#$%^&*(),.?":{}|<>]/;
 
   function cadastrar() {
     aguardar();
@@ -173,10 +194,14 @@
 
       finalizarAguardar();
       return false;
-    } else if (!email.includes('@')) {
+    } else if (!(emailVar.includes('@'))) {
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
-        "(o e-mail precisa conter @)";
+        "(A e-mail precisa conter @)";
+    } else if (senhaVar.length < 8 || charEspecial.test(senhaVar)) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(A senha deve ter ao menos 8 caracteres)";
     } else {
       setInterval(sumirMensagem, 5000);
     }

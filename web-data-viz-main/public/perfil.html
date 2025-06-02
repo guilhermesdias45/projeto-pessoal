@@ -45,15 +45,20 @@
               <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
             </div>
 
-            <div class="btn-nav-white">
+            <div class="btn-nav-white" style="display: block;" id="div_cadastro">
               <a href="cadastro.html">
                 <h3>Cadastrar</h3>
               </a>
             </div>
 
-            <div class="btn-nav-white">
+            <div class="btn-nav-white" style="display: block;" id="div_login">
               <a href="login.html">
                 <h3>Login</h3>
+            </div>
+
+            <div class="btn-nav-white" style="display: none;" id="div_perfil">
+              <a href="perfil.html">
+                <h3>Perfil</h3>
             </div>
 
             <div class="btn-nav-white">
@@ -79,11 +84,11 @@
       <div class="teste_perfil_container">
         <div>
           <h2>Perfil</h2>
-          <p>Nome: <br><span id="nome">nome</span></p>
-          <p>Username: <br><span id="username">apelido</span></p>
-          <p>Sobre mim: <br><span>Digitei alguma coisa</span></p>
-          <p>Jogos: <br><span>jogos</span></p>
-          <p>Melhores pontuações: <span>historico</span></p>
+          <p>Nome: <br><span id="nome"></span></p>
+          <p>Username: <br><span id="username"></span></p>
+          <p>Sobre mim: <br><span></span></p>
+          <p>Jogos: <br><span></span></p>
+          <p>Melhores pontuações: <span></span></p>
         </div>
         <div style="margin-top: 40px;">
           <button>Adicionar usuário</button>
@@ -107,18 +112,14 @@
 </body>
 
 </html>
-<script src="js/redirecionamento.js"></script>
 <script>
   function buscarInformacoes() {
     nome.innerHTML = sessionStorage.NOME_USUARIO;
     username.innerHTML = sessionStorage.USERNAME_USUARIO;
   }
 
-  if (sessionStorage.ID_USUARIO == ID_USUARIO) {
-
-  }
-
   function verificarAmigos() {
-
+    
   }
 </script>
+  <script src="js/redirecionamento.js"></script>

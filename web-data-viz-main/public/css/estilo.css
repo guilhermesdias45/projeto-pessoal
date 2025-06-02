@@ -142,7 +142,7 @@ body {
 /* LOGIN */
 
 .login {
-  height: var(--tamanho-login);
+  min-height: var(--tamanho-login);
   background-image: url('../assets/imgs/jogos.jpg');
   background-size: cover;
 }
