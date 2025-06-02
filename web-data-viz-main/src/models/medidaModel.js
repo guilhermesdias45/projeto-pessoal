@@ -1,8 +1,8 @@
 var database = require("../database/config");
 
-function buscarCategorias() {
+function buscarCategorias(req, res) {
 
-    var instrucaoSql = `select c.nome, count(*) from Usuario u inner join Categoria c
+    var instrucaoSql = `select c.nome, count(*) as contagem from Usuario u inner join Categoria c
 on c.idCategoria = u.categoria_favorita group by categoria_favorita;`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);

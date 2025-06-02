@@ -78,17 +78,13 @@
 
     <!-- HEADER  -->
 
-
-    <!-- simulador inicio -->
     <div class="simulador">
       <div class="teste_perfil_container">
         <div>
           <h2>Perfil</h2>
           <p>Nome: <br><span id="nome"></span></p>
           <p>Username: <br><span id="username"></span></p>
-          <p>Sobre mim: <br><span></span></p>
-          <p>Jogos: <br><span></span></p>
-          <p>Melhores pontuações: <span></span></p>
+          <p>Melhores pontuações:<br><span id="historico_partidas">Não há histórico de jogos no momento.</span></p>
         </div>
         <div style="margin-top: 40px;">
           <button>Adicionar usuário</button>
@@ -96,8 +92,6 @@
         </div>
       </div>
     </div>
-
-    <!-- simulador fim -->
 
     <!--footer inicio-->
     <div class="footer">
@@ -116,6 +110,10 @@
   function buscarInformacoes() {
     nome.innerHTML = sessionStorage.NOME_USUARIO;
     username.innerHTML = sessionStorage.USERNAME_USUARIO;
+
+    if(sessionStorage.HISTORICO_USUARIO != undefined){
+      historico_partidas.innerHTML = ``;
+    }
   }
 
   function verificarAmigos() {

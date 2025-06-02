@@ -16,7 +16,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body>
+<body onload="listar()">
 
   <div id="pagina">
 
@@ -88,6 +88,12 @@
           <canvas id="donut"></canvas>
         </div>
         <h2>Simulador</h2>
+
+        <div>
+          <p>Maior pontuação:</p>
+          <p id="p_maior_ponto"></p>
+        </div>
+        
         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium tempora architecto sint fugit
           dolorum? Ipsum laborum magnam similique labore, voluptate amet reprehenderit rem ab blanditiis quisquam
           laboriosam eaque alias. Reiciendis. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -127,49 +133,70 @@
 
 </html>
 <script>
-  function exibirTalhoesDoUsuario() {
-    fetch(`/medidas/tempo-real/${paramId}`, { cache: 'no-store' }).then(function (response) {
-      if (response.ok) {
-        response.json().then(function (resposta) {
-          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-          resposta.reverse();
+  const labelsCategoria = [];
+  const dataCategoria = [];
+  const coresCategoria = ['red', 'chocolate', 'blue', 'yellow', 'gray', 'pink', 'aqua', 'darkblue', 'darkmagenta', 'crimson', 'purple', 'snow', 'teal', 'chartreuse', 'blueviolet', 'coral', 'darkcyan', 'wheat'];
+  let totalVotos = 0;
+  const votosCategoria = [];
 
-          plotarGrafico(resposta, paramId);
-
-        });
-      } else {
-        console.error('Nenhum dado encontrado ou erro na API');
-      }
+  function listar() {
+    fetch("/medidas/dashboards", {
+      method: "GET",
     })
-      .catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      .then(function (resposta) {
+        resposta.json().then((categorias) => {
+          categorias.forEach((conta) => {
+            labelsCategoria.push(conta.nome);
+            console.log(conta.nome);
+            votosCategoria.push(conta.contagem);
+            console.log(conta.contagem);
+            totalVotos += conta.contagem;
+          });
+          plotarGraficoPorCento();
+          gerarDashboard();
+        });
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
       });
-  }
+    }
 
-  const ctxDonut = document.getElementById('donut').getContext('2d');
+      function gerarDashboard(){
+        
+        const ctxDonut = document.getElementById('donut').getContext('2d');
 
-  new Chart(ctxDonut, {
-    type: 'doughnut',
-    data: {
-      labels: ['Padrão', 'Escassez', 'Excesso'],
-      datasets: [{
-        data: [55, 24, 90, 67],
-        backgroundColor: ['red', 'blue', 'yellow'],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: {
-          position: 'bottom'
-        },
-        title: {
-          display: true,
-          text: 'Situação dos Sensores'
+        console.log(dataCategoria);
+
+    let myChart = new Chart(ctxDonut, {
+      type: 'doughnut',
+      data: {
+        labels: labelsCategoria,
+        datasets: [{
+          data: dataCategoria,
+          backgroundColor: coresCategoria,
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'bottom'
+          },
+          title: {
+            display: true,
+            text: 'Categorias (%)',
+          }
         }
       }
+    });
+  }
+
+  function plotarGraficoPorCento(){
+    for(let k = 0; k < votosCategoria.length; k++){
+      let porCento = (votosCategoria[k]/ totalVotos) * 100;
+      dataCategoria.push(porCento);
     }
-  });
+  }
 </script>
 <script src="js/redirecionamento.js"></script>

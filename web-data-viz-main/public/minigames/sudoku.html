@@ -46,7 +46,7 @@
         font-size: 1.5em;
     }
 
-    .button-style{
+    .button-style {
         width: 100%;
         cursor: pointer;
     }
@@ -54,46 +54,90 @@
 
 <body onload="gerarBlocos()">
 
-    <!-- HEADER  -->
-    <div class="header">
-        <div class="container">
-            <h1 class="titulo">SPTech Games</h1>
-            <ul class="navbar">
-                <li class="agora">
-                    <a href="#">Inicial</a>
-                </li>
-                <li>
-                    <a href="simulador.html">Simulador</a>
-                </li>
-                <li>
-                    <button onclick="Exibir()"><img src="assets/icon/icon-login.png"
-                            style="display: block; width: 50px;" alt=""></button>
-                    <div id="div_escondida" style="display: none; position: absolute;">
-                        <button onclick="testeLogin()">Perfil</button>
-                        <a href="">Jogos</a><br>
-                        <a href="">Sair</a><br>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <!-- HEADER  -->
+    <div id="pagina">
 
-    <div class="container-completo">
-        <h1>apenas um teste</h1>
-        <div id="container_sudoku"></div>
-        <div id="opcoes_numero" style="display: flex; margin: 0 auto; width: 414px;"></div>
+        <!-- HEADER  -->
+        <div class="header">
+            <div class="container">
+                <h1 class="titulo">SPTech Games</h1>
+                <ul class="navbar">
+                    <li class="agora">
+                        <a href="#">Inicial</a>
+                    </li>
+                    <li>
+                        <a href="simulador.html">Simulador</a>
+                    </li>
+                    <li>
+                        <a href="#" onclick="Exibir()"><img src="../assets/imgs/hamburguer-icone.png"
+                                style="display: block; width: 50px;" alt=""></a>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="div_escondida" style="display: none;">
+                <div class="janela">
+                    <div class="header-left">
+
+                        <div class="hello">
+                            <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+                        </div>
+
+                        <div class="btn-nav-white" style="display: block;" id="div_cadastro">
+                            <a href="cadastro.html">
+                                <h3>Cadastrar</h3>
+                            </a>
+                        </div>
+
+                        <div class="btn-nav-white" style="display: block;" id="div_login">
+                            <a href="login.html">
+                                <h3>Login</h3>
+                        </div>
+
+                        <div class="btn-nav-white" style="display: none;" id="div_perfil">
+                            <a href="perfil.html">
+                                <h3>Perfil</h3>
+                        </div>
+
+                        <div class="btn-nav-white">
+                            <a href="simulador.html">
+                                <h3>Simulador</h3>
+                            </a>
+                        </div>
+
+                        <div class="btn-logout" onclick="limparSessao()">
+                            <h3>Sair</h3>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- HEADER  -->
+
+        <div class="container-completo">
+            <h1>apenas um teste</h1>
+            <button onclick="comecar()">Começar Partida</button>
+            <div id="sudoku_jogo" style="display: none; flex-direction: column">
+                <div id="container_sudoku" style="display: flex;"></div>
+                <div id="opcoes_numero" style="display: flex; margin: 0 auto; width: 414px;"></div>
+            </div>
+        </div>
     </div>
 </body>
 
 </html>
 <script>
+    const partida_sudoku = [1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+    let contador = 0;
     function gerarBlocos() {
         for (let i = 1; i <= 9; i++) {
             container_sudoku.innerHTML += `<div id="container_cubo${i}" class="container-cubo"></div>`
             for (let j = 1; j <= 9; j++) {
                 let container = document.getElementById(`container_cubo${i}`);
-                container.innerHTML += `<div class="bloco" id="bloco${i + "bloquinho" + j}" onclick="encontrarBloco('bloco${i + "bloquinho" + j}')">${j}</div>`;
+                container.innerHTML += `<div class="bloco" id="bloco${i + "bloquinho" + j}" onclick="encontrarBloco('bloco${i + "bloquinho" + j}')">${partida_sudoku[contador]}</div>`;
+                contador++;
             }
         }
         for (let j = 1; j <= 9; j++) {
@@ -101,21 +145,21 @@
             container.innerHTML += `<button class="bloco button-style" onclick="numeroEscolhido(${j})">${j}</button>`;
         }
     }
-    
-    function numeroEscolhido(param){
+
+    function numeroEscolhido(param) {
         ultimoBlocoEscolhido.innerHTML = param;
     }
-    
+
     let blocoAnterior = null;
     let ultimoBlocoEscolhido = null;
 
     contador = 0;
-    function encontrarBloco(param){
+    function encontrarBloco(param) {
         ultimoBlocoEscolhido = document.getElementById(param);
 
         ultimoBlocoEscolhido.style.backgroundColor = "rgb(109, 186, 243)";
 
-        if(contador > 0){
+        if (contador > 0) {
             blocoAnterior.style.backgroundColor = "rgb(243, 243, 243)";
         }
         contador++
@@ -130,5 +174,13 @@
             teste[i].style.backgroundColor = "blue";
         }
     }
+
+    function comecar(){
+        if(sudoku_jogo.style.display = 'none'){
+            sudoku_jogo.style.display = 'flex'
+        } else {
+            sudoku_jogo.style.display = 'none'
+        }
+    }
 </script>
-<script src="js/redirecionamento.js"></script>
+<script src="../js/redirecionamento.js"></script>
