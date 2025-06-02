@@ -14,8 +14,22 @@
   <link rel="icon" href="./assets/icon/favicon2.ico">
   <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
+<style>
+  .card-jogo {
+        background-color: deepskyblue;
+        width: 29%;
+        padding: 5px;
+        margin: 10px;
+        border: black solid 1px;
+    }
 
-<body onload="buscarInformacoes()">
+    .jogos_container{
+      display: flex;
+      flex-wrap: wrap;
+    }
+</style>
+
+<body>
 
   <div id="pagina">
 
@@ -28,7 +42,7 @@
             <a href="index.html">Inicial</a>
           </li>
           <li>
-            <a href="jogos.html">Jogos</a>
+            <a href="#">Jogos</a>
         </li>
           <li>
             <a href="simulador.html">Simulador</a>
@@ -82,17 +96,12 @@
     <!-- HEADER  -->
 
     <div class="simulador">
-      <div class="perfil_container">
-        <div>
-          <h2>Perfil</h2>
-          <p>Nome: <br><span id="nome"></span></p>
-          <p>Username: <br><span id="username"></span></p>
-          <p>Melhores pontuações:<br><span id="historico_partidas">Não há histórico de jogos no momento.</span></p>
-        </div>
-        <div style="margin-top: 40px;">
-          <button>Adicionar usuário</button>
-          <button>Enviar mensagem</button>
-        </div>
+      <h2>Jogos:</h2>
+      <div class="perfil_container jogos_container">
+        <div class="card-jogo"></div>
+        <div class="card-jogo"></div>
+        <div class="card-jogo"></div>
+        <div class="card-jogo"></div>
       </div>
     </div>
 
@@ -108,17 +117,6 @@
 
 </html>
 <script>
-  function buscarInformacoes() {
-    nome.innerHTML = sessionStorage.NOME_USUARIO;
-    username.innerHTML = sessionStorage.USERNAME_USUARIO;
 
-    if (sessionStorage.HISTORICO_USUARIO != undefined) {
-      historico_partidas.innerHTML = ``;
-    }
-  }
-
-  function verificarAmigos() {
-
-  }
 </script>
 <script src="js/redirecionamento.js"></script>

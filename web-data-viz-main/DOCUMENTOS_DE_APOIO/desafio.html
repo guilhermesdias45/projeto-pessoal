@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .container {
+        margin: 10 auto;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .card {
+        background-color: deepskyblue;
+        width: 30%;
+        padding: 5px;
+        margin: 3px;
+        border: black solid 1px;
+    }
+
+    .alunos_cadastrados {
+        display: flex;
+        flex-wrap: wrap;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div>
+            <input type="text" id="ipt_nome" placeholder="Nome para cadastro...">
+            <input type="text" id="ipt_ra" placeholder="RA para cadastro ...">
+            <input type="number" id="ipt_nota" placeholder="Nota para cadastro ...">
+            <input type="text" id="ipt_busca" placeholder="Nome para busca ..." oninput="Busca()">
+        </div>
+        <div>
+            <button onclick="Cadastrar()">Cadastrar</button>
+            <button onclick="Atualizar()">Buscar Todos</button>
+            <button onclick="ExibirAcimaSeis()">Exibir Notas Positivas</button>
+        </div>
+    </div>
+
+    <div class="alunos_cadastrados" id="alunos_cadastrados">
+    </div>
+</body>
+
+</html>
+<script>
+    const Alunos = [];
+    function Cadastrar() {
+        let nome = ipt_nome.value;
+        let ra = ipt_ra.value;
+        let nota = Number(ipt_nota.value);
+
+        const json = {
+            "nome": nome,
+            "ra": ra,
+            "nota": nota
+        };
+
+        Alunos.push(json);
+
+        Atualizar();
+    }
+
+    function Atualizar(param, nomeParam) {
+        let name = nomeParam;
+
+        alunos_cadastrados.innerHTML = ``;
+        
+        let mostrar = true;
+
+        for (let i = 0; i < Alunos.length; i++) {
+            mostrar = true;
+            if (param == 6) {
+                if (Alunos[i].nota < 6) {
+                    mostrar = false;
+                }
+            } else if(param == 1){
+                if(Alunos[i].nome.includes(name)){
+                    mostrar = true;
+                } else {
+                    mostrar = false
+                }
+            }
+
+            if (mostrar == true) {
+                alunos_cadastrados.innerHTML += `
+                <div class="card">
+                    <h3>Nome: ${Alunos[i].nome}</h3>
+                    <h4>RA: ${Alunos[i].ra}</h4>
+                    <h4>Nota: ${Alunos[i].nota}</h4>
+                    </div>
+                    `;
+            }
+        }
+    }
+
+    function ExibirAcimaSeis() {
+        Atualizar(6);
+    }
+
+    function Busca(){
+        let nome = ipt_busca.value;
+
+        Atualizar(1, nome);
+    }
+</script>
