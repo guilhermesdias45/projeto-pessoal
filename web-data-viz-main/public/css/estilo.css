@@ -24,7 +24,7 @@ body {
 
 .header {
   height: var(--tamanho-header);
-  border-bottom: 2px solid gray;
+  border-bottom: 2px solid blueviolet;
 }
 
 .header .container {
@@ -35,7 +35,7 @@ body {
 
 .header a {
   text-decoration: none;
-  color: #e3b062;
+  color: blueviolet;
 }
 
 .agora {
@@ -66,7 +66,6 @@ body {
 .banner {
   height: var(--tamanho-banner);
   color: white;
-  background-image: url("/public/assets/imgs/jogos.jpg");
   background-color: - var(--cor-tela);
   background-size: cover;
 }
@@ -121,10 +120,18 @@ body {
 .social {
   background-color: #e5e5e5;
   display: flex;
+  min-height: 50vh;
+  border-top: 1px solid blueviolet;
 }
 
 .social .container {
   justify-content: center;
+}
+
+.social .container .sobre-nos{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .box img {

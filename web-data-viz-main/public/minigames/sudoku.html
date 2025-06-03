@@ -125,6 +125,7 @@
                 <button>Ver Regras</button>
             </div>
             <div id="sudoku_jogo" style="display: none; flex-direction: column">
+                <div id="temporizador"></div>
                 <div id="container_sudoku" style="display: flex;"></div>
                 <div id="opcoes_numero" style="display: flex; margin: 0 auto; width: 414px;"></div>
                 <div>
@@ -199,6 +200,25 @@
         } else {
             sudoku_jogo.style.display = 'none'
         }
+    }
+
+    let contadorSeg = 0;
+    let contadorMin = 0;
+    let contadorHor = 0;
+
+    function contadorTiming(){
+        setInterval(() => {
+            atualizarContador();
+            contadorSeg++;
+        }, 1000);
+    }
+
+    function atualizarContador() {
+        if(contadorSeg >= 60){
+            contadorSeg = 0;
+            contadorMin++;
+        }
+        temporizador.innerHTML = `${contadorMin}:${contadorSeg}`;
     }
 </script>
 <script src="../js/redirecionamento.js"></script>
