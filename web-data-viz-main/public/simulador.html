@@ -16,7 +16,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body onload="listar()">
+<body onload="iniciar()">
 
   <div id="pagina">
 
@@ -66,8 +66,8 @@
             </div>
 
             <div class="btn-nav-white">
-              <a href="simulador.html">
-                <h3>Simulador</h3>
+              <a href="jogos.html">
+                <h3>Jogos</h3>
               </a>
             </div>
 
@@ -93,20 +93,9 @@
         <h2>Simulador</h2>
 
         <div>
-          <p>Maior pontuação:</p>
-          <p id="p_maior_ponto"></p>
+          <p><b>Categoria(s) mais votada(s): </b> <span id="categ_mais_votada"></span></p>
         </div>
 
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium tempora architecto sint fugit
-          dolorum? Ipsum laborum magnam similique labore, voluptate amet reprehenderit rem ab blanditiis quisquam
-          laboriosam eaque alias. Reiciendis. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-          Accusantium tempora architecto sint fugit dolorum? Ipsum laborum magnam similique labore, voluptate amet
-          reprehenderit rem ab blanditiis quisquam laboriosam eaque alias. Reiciendis.</p>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium tempora architecto sint fugit
-          dolorum? Ipsum laborum magnam similique labore, voluptate amet reprehenderit rem ab blanditiis quisquam
-          laboriosam eaque alias. Reiciendis. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-          Accusantium tempora architecto sint fugit dolorum? Ipsum laborum magnam similique labore, voluptate amet
-          reprehenderit rem ab blanditiis quisquam laboriosam eaque alias. Reiciendis.</p>
         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium tempora architecto sint fugit
           dolorum? Ipsum laborum magnam similique labore, voluptate amet reprehenderit rem ab blanditiis quisquam
           laboriosam eaque alias. Reiciendis. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -140,7 +129,11 @@
   let totalVotos = 0;
   const votosCategoria = [];
 
-  function listar() {
+  function iniciar(){
+    listarCategorias();
+  }
+
+  function listarCategorias() {
     fetch("/medidas/dashboards", {
       method: "GET",
     })
@@ -148,13 +141,13 @@
         resposta.json().then((categorias) => {
           categorias.forEach((conta) => {
             labelsCategoria.push(conta.nome);
-            console.log(conta.nome);
             votosCategoria.push(conta.contagem);
-            console.log(conta.contagem);
             totalVotos += conta.contagem;
           });
           plotarGraficoPorCento();
           gerarDashboard();
+          
+          CategoriasKPI();
         });
       })
       .catch(function (resposta) {
@@ -165,8 +158,6 @@
   function gerarDashboard() {
 
     const ctxDonut = document.getElementById('donut').getContext('2d');
-
-    console.log(dataCategoria);
 
     let myChart = new Chart(ctxDonut, {
       type: 'doughnut',
@@ -196,8 +187,33 @@
   function plotarGraficoPorCento() {
     for (let k = 0; k < votosCategoria.length; k++) {
       let porCento = (votosCategoria[k] / totalVotos) * 100;
-      dataCategoria.push(porCento);
+      dataCategoria.push(Number(porCento.toFixed(2)));
     }
   }
+  function CategoriasKPI(){
+    let maiorCategoria = 0;
+    let indiceMaiorCategoria = 0;
+    console.log('Tamanho do vetor ',dataCategoria.length);
+    
+    for(let i = 0; i < dataCategoria.length; i++){
+      if(maiorCategoria <= dataCategoria[i]){
+        maiorCategoria = dataCategoria[i];
+        indiceMaiorCategoria = i;
+        console.log('valor atual ',dataCategoria[i]);
+        console.log('indice atual ',indiceMaiorCategoria);
+      }
+        if(maiorCategoria == dataCategoria[i]){
+          if(i > 0){
+        categ_mais_votada.innerHTML += `,`;
+
+          }
+        categ_mais_votada.innerHTML += `${labelsCategoria[indiceMaiorCategoria]}`;
+      } else {
+        categ_mais_votada.innerHTML = `${labelsCategoria[indiceMaiorCategoria]}`;
+      }
+  }
+    
+  }
 </script>
+
 <script src="js/redirecionamento.js"></script>
