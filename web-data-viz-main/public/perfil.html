@@ -87,6 +87,7 @@
           <h2>Perfil</h2>
           <p>Nome: <br><span id="nome"></span></p>
           <p>Username: <br><span id="username"></span></p>
+          <p>Categoria de jogos favorita: <br><span id="categoria"></span></p>
           <p>Melhores pontuações:<br><span id="historico_partidas">Não há histórico de jogos no momento.</span></p>
         </div>
         <div style="margin-top: 40px;">
@@ -111,7 +112,7 @@
   function buscarInformacoes() {
     nome.innerHTML = sessionStorage.NOME_USUARIO;
     username.innerHTML = sessionStorage.USERNAME_USUARIO;
-    categoria = sessionStorage.CATEGORIA_USUARIO;
+    categoria.innerHTML = sessionStorage.CATEGORIA_USUARIO;
     if (sessionStorage.HISTORICO_USUARIO != undefined) {
       historico_partidas.innerHTML = `Não há histórico para recarregar no momento.`;
     }

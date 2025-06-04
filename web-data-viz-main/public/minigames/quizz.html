@@ -30,7 +30,7 @@
     }
 </style>
 
-<body onload="onloadEsconder()">
+<body onload="buscarPerguntas(), onloadEsconder()">
 
     <div id="pagina">
 
@@ -174,36 +174,7 @@
 
 </html>
 <script>
-    const listaDeQuestoes = [
-
-        {
-            pergunta: "Qual mês tem 30 dias?",
-            alternativaA: "Janeiro",
-            alternativaB: "Dezembro",
-            alternativaC: "Junho",
-            alternativaD: "Agosto",
-            alternativaCorreta: "alternativaC"
-        },
-
-        {
-            pergunta: "Quantas horas tem em um dia?",
-            alternativaA: "30 horas",
-            alternativaB: "38 horas",
-            alternativaC: "48 horas",
-            alternativaD: "24 horas",
-            alternativaCorreta: "alternativaD"
-        },
-
-        {
-            pergunta: "Qual destes números é ímpar?",
-            alternativaA: "Dez",
-            alternativaB: "Doze",
-            alternativaC: "Oito",
-            alternativaD: "Onze",
-            alternativaCorreta: "alternativaD"
-        }
-
-    ]
+    const listaDeQuestoes = []
 
     // variáveis globais    
     let numeroDaQuestaoAtual = 0
@@ -211,7 +182,7 @@
     let tentativaIncorreta = 0
     let certas = 0
     let erradas = 0
-    let quantidadeDeQuestoes = listaDeQuestoes.length
+    let quantidadeDeQuestoes = 0;
     // let isUltima = numeroDaQuestaoAtual == quantidadeDeQuestoes-1 ? true : false
 
     function onloadEsconder() {
@@ -233,6 +204,27 @@
         btnProx.disabled = true
         // btnConcluir.disabled = true
         btnTentarNovamente.disabled = true
+    }
+
+    function buscarPerguntas() {
+        fetch("/medidas/perguntas/", {
+            method: "GET",
+        })
+            .then(function (resposta) {
+                resposta.json().then((perguntas) => {
+                    let i = 0;
+                    perguntas.forEach((pergunta) => {
+                        listaDeQuestoes.push(pergunta);
+
+                        console.log(listaDeQuestoes[i]);
+                        i++;
+                    });
+                    quantidadeDeQuestoes = listaDeQuestoes.length;
+                });
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
     }
 
     function preencherHTMLcomQuestaoAtual(index) {

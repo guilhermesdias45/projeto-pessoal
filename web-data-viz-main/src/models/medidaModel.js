@@ -9,6 +9,15 @@ on c.idCategoria = u.categoria_favorita group by categoria_favorita;`;
     return database.executar(instrucaoSql);
 }
 
+function buscarQuestao(req, res) {
+
+    var instrucaoSql = `SELECT pergunta, alternativaA, alternativaB, alternativaC, alternativaD, alternativaCorreta
+FROM Quizz_Questao;`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 // function buscarMedidasEmTempoReal(idAquario) {
 
 //     var instrucaoSql = `SELECT 
@@ -26,4 +35,5 @@ on c.idCategoria = u.categoria_favorita group by categoria_favorita;`;
 module.exports = {
     buscarCategorias,
     // buscarMedidasEmTempoReal
+    buscarQuestao
 }
