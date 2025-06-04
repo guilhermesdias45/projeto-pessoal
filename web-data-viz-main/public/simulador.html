@@ -30,7 +30,7 @@
           </li>
           <li>
             <a href="jogos.html">Jogos</a>
-        </li>
+          </li>
           <li>
             <a href="simulador.html">Simulador</a>
           </li>
@@ -66,8 +66,8 @@
             </div>
 
             <div class="btn-nav-white">
-              <a href="jogos.html">
-                <h3>Jogos</h3>
+              <a href="allPerfil.html">
+                <h3>Todos os Perfis</h3>
               </a>
             </div>
 
@@ -129,7 +129,7 @@
   let totalVotos = 0;
   const votosCategoria = [];
 
-  function iniciar(){
+  function iniciar() {
     listarCategorias();
   }
 
@@ -146,7 +146,7 @@
           });
           plotarGraficoPorCento();
           gerarDashboard();
-          
+
           CategoriasKPI();
         });
       })
@@ -190,29 +190,29 @@
       dataCategoria.push(Number(porCento.toFixed(2)));
     }
   }
-  function CategoriasKPI(){
+  function CategoriasKPI() {
     let maiorCategoria = 0;
     let indiceMaiorCategoria = 0;
-    console.log('Tamanho do vetor ',dataCategoria.length);
-    
-    for(let i = 0; i < dataCategoria.length; i++){
-      if(maiorCategoria <= dataCategoria[i]){
+    console.log('Tamanho do vetor ', dataCategoria.length);
+
+    for (let i = 0; i < dataCategoria.length; i++) {
+      if (maiorCategoria <= dataCategoria[i]) {
         maiorCategoria = dataCategoria[i];
         indiceMaiorCategoria = i;
-        console.log('valor atual ',dataCategoria[i]);
-        console.log('indice atual ',indiceMaiorCategoria);
+        console.log('valor atual ', dataCategoria[i]);
+        console.log('indice atual ', indiceMaiorCategoria);
       }
-        if(maiorCategoria == dataCategoria[i]){
-          if(i > 0){
-        categ_mais_votada.innerHTML += `,`;
+      if (maiorCategoria == dataCategoria[i]) {
+        if (i > 0) {
+          categ_mais_votada.innerHTML += `,`;
 
-          }
+        }
         categ_mais_votada.innerHTML += `${labelsCategoria[indiceMaiorCategoria]}`;
       } else {
         categ_mais_votada.innerHTML = `${labelsCategoria[indiceMaiorCategoria]}`;
       }
-  }
-    
+    }
+
   }
 </script>
 
