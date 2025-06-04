@@ -19,14 +19,6 @@ CREATE TABLE Usuario (
   PRIMARY KEY (idUsuario),
   FOREIGN KEY (categoria_favorita) REFERENCES Categoria(idCategoria));
 
--- CREATE TABLE Guilda (
---   idGuilda INT NOT NULL AUTO_INCREMENT,
---   nome VARCHAR(45) NOT NULL,
---   descricao VARCHAR(45) NOT NULL,
---   lider INT NOT NULL,
---   PRIMARY KEY (idGuilda),
---   FOREIGN KEY (lider) REFERENCES Usuario (idUsuario));
-
 CREATE TABLE Amizade (
   idUsuario1 INT NOT NULL,
   idUsuario2 INT NOT NULL,
@@ -56,6 +48,24 @@ CREATE TABLE Historico_Jogo (
   FOREIGN KEY (fkJogo) REFERENCES Jogo (idJogo)
   );
 
+-- CREATE TABLE Quizz (
+-- 	idPartida INT NOT NULL AUTO_INCREMENT,
+--     qtdAcertos INT NOT NULL,
+--     PRIMARY KEY (idPergunta),
+--     FOREIGN KEY (fkJogo) REFERENCES Jogo(idJogo)
+-- );
+
+CREATE TABLE Quizz_Questao (
+	idPergunta INT NOT NULL AUTO_INCREMENT,
+    pergunta VARCHAR(200) NOT NULL,
+    alternativaA VARCHAR(50) NOT NULL,
+    alternativaB VARCHAR(50) NOT NULL,
+    alternativaC VARCHAR(50) NOT NULL,
+    alternativaD VARCHAR(50) NOT NULL,
+    alternativaCorreta VARCHAR(50) NOT NULL,
+    PRIMARY KEY (idPergunta)
+);
+
 -- ALTER TABLE Usuario ADD FOREIGN KEY (fkGuilda) REFERENCES Guilda (idGuilda);
 
 INSERT INTO Categoria (nome, descricao) VALUES
@@ -83,20 +93,6 @@ INSERT INTO Usuario (nome, username, email, senha, categoria_favorita) VALUES
 ('Bruno Costa', 'brunoc', 'bruno@email.com', 'abc123', 2),
 ('Carla Mendes', 'carlam', 'carla@email.com', 'passcarla', 3);
 
--- INSERT INTO Guilda (nome, descricao, lider) VALUES
--- ('Guilda dos Dragões', 'Especialistas em PvP', 1),
--- ('Guardas da Floresta', 'Focados em exploração', 2),
--- ('Mestres do Código', 'Guilda de programadores', 3);
-
--- UPDATE Usuario SET fkGuilda = 1 WHERE idUsuario = 1;
--- UPDATE Usuario SET fkGuilda = 2 WHERE idUsuario = 2;
--- UPDATE Usuario SET fkGuilda = 3 WHERE idUsuario = 3;
-
-INSERT INTO Amizade (idUsuario1, idUsuario2, usuario1Amizade, usuario2Amizade) VALUES
-(1, 2, 1, 1),
-(1, 3, 1, 0),
-(2, 3, 1, 1);
-
 select * from Usuario;
 
 INSERT INTO Jogo (idJogo, nome, link, fkCategoria) VALUES
@@ -110,4 +106,11 @@ INSERT INTO Historico_Jogo (fkUsuario, fkJogo, data_hora, pontos_numero) VALUES
 (2, 1, '2025-05-16 14:20', '9100'),
 (3, 3, '2025-05-16 19:10', '6800');
 
-select * from Usuario;
+INSERT INTO Quizz_Questao (pergunta, alternativaA, alternativaB, alternativaC, alternativaD, alternativaCorreta)
+VALUES
+	("Qual mês tem 30 dias?", "Janeiro", "Dezembro", "Junho", "Agosto", "alternativaC"),
+    ("Quantas horas tem em um dia?", "30 horas", "38 horas", "48 horas", "24 horas", "alternativaD"),
+    ("Qual destes números é ímpar?", "Dez", "Doze", "Oito", "Onze", "alternativaD");
+
+SELECT pergunta, alternativaA, alternativaB, alternativaC, alternativaD, alternativaCorreta
+FROM Quizz_Questao;
