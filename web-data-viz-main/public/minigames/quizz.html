@@ -99,6 +99,12 @@
         <!-- TELA JOGO  -->
         <div id="pontuacaoEJogo">
             <button id="btnIniciarQuiz" onclick="iniciarQuiz()">INICIAR QUIZ</button>
+            <div id="regras-quizz">
+                <h1>Quizz</h1>
+                <p><b>O quão bem você conhece o mundo dos jogos?</b> Este é um breve quizz sobre o mundo dos jogos,
+                    sobre jogos, personagens, videogames e as principais marcas.</p>
+                <p>Ao final do Quizz, será informado a sua pontuação.</p>
+            </div>
 
             <div id="pontuacao" class="flex-colunar width-fit-content border-primary">
                 <div id="pontuacaoDuranteJogo" class="flex-colunar padding-8">
@@ -217,6 +223,7 @@
         document.getElementById('pontuacao').style.display = "flex"
         document.getElementById('jogo').style.display = "flex"
         document.getElementById('btnIniciarQuiz').style.display = "none"
+        document.getElementById('regras-quizz').style.display = "none";
 
         document.getElementById('qtdQuestoes').innerHTML = quantidadeDeQuestoes
 
