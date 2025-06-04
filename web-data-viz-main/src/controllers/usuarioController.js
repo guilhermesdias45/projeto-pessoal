@@ -21,22 +21,27 @@ function autenticar(req, res) {
 
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
-                        
-                            if (resultadoAutenticar.length == 1) {
-                                res.json({
-                                    idUsuario: resultadoAutenticar[0].idUsuario,
-                                    email: resultadoAutenticar[0].email,
-                                    nome: resultadoAutenticar[0].nome,
-                                    senha: resultadoAutenticar[0].senha,
-                                    username: resultadoAutenticar[0].username,
-                                    categoria: resultadoAutenticar[0].categoria_favorita
-                                });
-                            } else {
-                                res.status(204).json();
-                            }
+
+                        if (resultadoAutenticar.length == 1) {
+                            res.json({
+                                idUsuario: resultadoAutenticar[0].idUsuario,
+                                email: resultadoAutenticar[0].email,
+                                nome: resultadoAutenticar[0].nome,
+                                senha: resultadoAutenticar[0].senha,
+                                username: resultadoAutenticar[0].username,
+                                categoria: resultadoAutenticar[0].categoria_favorita,
+
+                                idPerfil: resultadoAutenticar[0].idUsuario,
+                                nomePerfil: resultadoAutenticar[0].nome,
+                                usernamePerfil: resultadoAutenticar[0].username,
+                                categoriaPerfil: resultadoAutenticar[0].categoria_favorita
+                            });
+                        } else {
+                            res.status(204).json();
+                        }
                         // aquarioModel.buscarAquariosPorEmpresa(resultadoAutenticar[0].empresaId)
-                            // then((resultadoAquarios) => {
-                            // })
+                        // then((resultadoAquarios) => {
+                        // })
                     } else if (resultadoAutenticar.length == 0) {
                         res.status(403).send("Email e/ou senha inválido(s)");
                     } else {
@@ -93,9 +98,9 @@ function cadastrar(req, res) {
 }
 
 function listar(req, res) {
-  usuarioModel.listar().then((resultado) => {
-    res.status(200).json(resultado);
-  });
+    usuarioModel.listar().then((resultado) => {
+        res.status(200).json(resultado);
+    });
 }
 
 module.exports = {
