@@ -37,7 +37,7 @@
         <!-- HEADER  -->
         <div class="header">
             <div class="container">
-                <img src="assets/imgs/SPCG.png" alt="" width="250px">
+                <img src="../assets/imgs/SPCG.png" alt="" width="250px">
                 <ul class="navbar">
                     <li class="agora">
                         <a href="#">Inicial</a>
@@ -49,7 +49,7 @@
                         <a href="simulador.html">Simulador</a>
                     </li>
                     <li>
-                        <a href="#" onclick="Exibir()"><img src="assets/imgs/hamburguer-icone.png"
+                        <a href="#" onclick="Exibir()"><img src="../assets/imgs/hamburguer-icone.png"
                                 style="display: block; width: 50px;" alt=""></a>
                     </li>
                 </ul>
@@ -278,10 +278,11 @@
     function avancar() {
         btnProx.disabled = true
         btnSubmeter.disabled = false
+        console.log(numeroDaQuestaoAtual);
 
         desmarcarRadioButtons()
 
-        if (numeroDaQuestaoAtual < quantidadeDeQuestoes - 1) {
+        if (numeroDaQuestaoAtual <= quantidadeDeQuestoes - 1) {
             preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual)
         } else {
             finalizarJogo()
@@ -325,8 +326,8 @@
                 erradas++
                 document.getElementById("spanErradas").innerHTML = erradas
             }
-            numeroDaQuestaoAtual++
         })
+        numeroDaQuestaoAtual++
     }
 
     function limparCoresBackgroundOpcoes() {
