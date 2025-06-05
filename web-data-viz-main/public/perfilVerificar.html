@@ -9,13 +9,14 @@
   <title>SPCG | Perfil</title>
 
   <script src="./js/sessao.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <link rel="stylesheet" href="./css/estilo.css">
   <link rel="icon" href="assets/imgs/SPCG.png" type="image/png">
   <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 
-<body onload="buscarInformacoes()">
+<body onload="buscarInformacoes(), dashboardsAcertosErros()">
 
   <div id="pagina">
 
@@ -88,11 +89,12 @@
           <p>Nome: <br><span id="nome"></span></p>
           <p>Username: <br><span id="username"></span></p>
           <p>Categoria de jogos favorita: <br><span id="categoria"></span></p>
-          <p>Melhores pontuações:<br><span id="historico_partidas">Não há histórico de jogos no momento.</span></p>
-        </div>
-        <div style="margin-top: 40px;">
-          <button>Adicionar usuário</button>
-          <button>Enviar mensagem</button>
+          <div>
+            <p>Melhores pontuações:<br><span id="historico_partidas">Não há histórico de jogos no momento.</span></p>
+            <div style="width: 100%; height: 100%; margin: auto;">
+              <canvas id="donut"></canvas>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -109,6 +111,10 @@
 
 </html>
 <script>
+  let acertos = 0;
+  let erros = 0;
+  let tentativas = 0;
+
   function buscarInformacoes() {
     nome.innerHTML = sessionStorage.NOME_PERFIL;
     username.innerHTML = sessionStorage.USERNAME_PERFIL;
@@ -119,8 +125,61 @@
     }
   }
 
-  function verificarAmigos() {
+  function dashboardsAcertosErros() {
+    let idPerfil = sessionStorage.ID_PERFIL;
 
+    console.log(idPerfil);
+
+    fetch(`/medidas/buscarResultados/${idPerfil}`, {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        resposta.json().then((conta) => {
+          conta.forEach((acertosErros) => {
+            acertos += acertosErros.certo;
+            erros += acertosErros.errado;
+
+            tentativas += acertosErros.certo;
+            tentativas += acertosErros.errado;
+          });
+          gerarDashboard();
+        });
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
+
+  function gerarDashboard() {
+    if (tentativas > 0) {
+      historico_partidas.innerHTML = ``;
+
+      const ctxDonut = document.getElementById('donut').getContext('2d');
+
+      let myChart = new Chart(ctxDonut, {
+        type: 'doughnut',
+        data: {
+          labels: ['Acertos', 'Erros'],
+          datasets: [{
+            data: [(acertos / tentativas * 100), (erros / tentativas * 100)],
+            backgroundColor: ['green', 'red'],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'bottom'
+            },
+            title: {
+              display: true,
+              text: 'Quizz Resultados: (%)',
+            }
+          }
+        }
+      });
+    }
   }
 </script>
 <script src="js/redirecionamento.js"></script>

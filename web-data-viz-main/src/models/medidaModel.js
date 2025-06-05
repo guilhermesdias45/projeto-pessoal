@@ -25,6 +25,19 @@ function salvarResultado(per1, res1, idUsuario) {
     return database.executar(instrucaoSql);
 }
 
+function buscarResultados(idUsuario) {
+
+    var instrucaoSql = `select fkUsuario, (select count(*) from Quizz
+                            where acerto = 1 and fkUsuario = ${idUsuario}) certo,
+                            (select count(*) from Quizz
+                            where acerto = 0 and fkUsuario = ${idUsuario}) errado
+                        from Quizz group by fkUsuario;`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
 // function buscarMedidasEmTempoReal(idAquario) {
 
 //     var instrucaoSql = `SELECT 
@@ -43,5 +56,6 @@ module.exports = {
     buscarCategorias,
     // buscarMedidasEmTempoReal
     buscarQuestao,
-    salvarResultado
+    salvarResultado,
+    buscarResultados
 }

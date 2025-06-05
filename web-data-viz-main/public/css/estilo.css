@@ -345,9 +345,8 @@ input {
   color: black;
   display: flex;
   justify-content: center;
-    align-items: center;
-    
-    min-height: 60vh;
+  align-items: center;
+  min-height: 60vh;
 }
 
 .simulador .container {
@@ -412,7 +411,7 @@ input {
     margin: auto;
     width: 70%;
     background-color: beige;
-    height: var(--tamanho-simulador);
+    min-height: var(--tamanho-simulador);
 }
 
 .header-left a {
