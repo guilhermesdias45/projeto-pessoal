@@ -176,6 +176,8 @@
 <script>
     const listaDeQuestoes = [];
     const todasPerguntas = [];
+    const perguntasEscolhidas = [];
+    const vetorResultados = [];
 
     // variáveis globais    
     let numeroDaQuestaoAtual = 0
@@ -208,7 +210,7 @@
     }
 
     function buscarPerguntas() {
-        fetch("/medidas/perguntas/", {
+        fetch("/medidas/perguntas", {
             method: "GET",
         })
             .then(function (resposta) {
@@ -317,6 +319,7 @@
                 document.getElementById(alternativaCorreta).classList.add("text-success-with-bg")
                 pontuacaoFinal++
                 certas++
+                vetorResultados.push(1);
                 document.getElementById("spanCertas").innerHTML = certas
             } else if (option.checked && option.value !== respostaQuestaoAtual) {
                 const wrongLabelId = option.labels[0].id
@@ -325,6 +328,7 @@
                 document.getElementById(alternativaCorreta).classList.add("text-success-with-bg")
                 tentativaIncorreta++
                 erradas++
+                vetorResultados.push(0);
                 document.getElementById("spanErradas").innerHTML = erradas
             }
         })
@@ -352,15 +356,15 @@
         const porcentagemFinalDeAcertos = pontuacaoFinal / quantidadeDeQuestoes
 
         if (porcentagemFinalDeAcertos <= 0.3) {
-            textoParaMensagemFinal = "Parece que você não estudou..."
+            textoParaMensagemFinal = "Parece que você não é entendedor dos jogos..."
             classComCoresParaMensagemFinal = "text-danger-with-bg"
         }
         else if (porcentagemFinalDeAcertos > 0.3 && porcentagemFinalDeAcertos < 0.9) {
-            textoParaMensagemFinal = "Pode melhorar na próxima, hein!"
+            textoParaMensagemFinal = "Você é um gamer nutella!"
             classComCoresParaMensagemFinal = "text-warning-with-bg"
         }
         else if (porcentagemFinalDeAcertos >= 0.9) {
-            textoParaMensagemFinal = "Uau, parabéns!"
+            textoParaMensagemFinal = "Parabéns! Você é um Gamer Raiz!"
             classComCoresParaMensagemFinal = "text-success-with-bg"
         }
 
@@ -378,28 +382,50 @@
         // btnConcluir.disabled = true
         btnTentarNovamente.disabled = false
 
+        salvarResultados();
     }
 
-    const perguntasEscolhidas = [];
-
-    function sortearPergunta(){
-        for(let i = 0; i < 10; i++){
+    function sortearPergunta() {
+        for (let i = 0; i < 10; i++) {
             let verificacao = false;
 
             let sorteio = Number((Math.random() * todasPerguntas.length).toFixed());
 
-            for(let k = 0; k < perguntasEscolhidas.length; k++){
-                if(listaDeQuestoes[k].idPergunta == perguntasEscolhidas[k].idPergunta){
+            for (let k = 0; k < perguntasEscolhidas.length; k++) {
+                if (listaDeQuestoes[k].idPergunta == perguntasEscolhidas[k].idPergunta) {
                     verificacao = true;
                     break;
                 }
             }
-            if(sorteio >= 0 && sorteio <= (todasPerguntas.length - 1) && verificacao == false){
+            if (sorteio >= 0 && sorteio <= (todasPerguntas.length - 1) && verificacao == false) {
                 listaDeQuestoes.push(todasPerguntas[sorteio]);
-            } else { 
+            } else {
                 i--;
             }
         }
+    }
+
+    function salvarResultados() {
+        for(let m = 0; m < listaDeQuestoes.length; m++){
+
+            fetch("/medidas/salvar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    pergunta1: listaDeQuestoes[m].idPergunta,
+                    resposta1: vetorResultados[m],
+                    idUsuario: sessionStorage.ID_USUARIO
+            }),
+        })
+        .then(function (resposta) {
+            console.log("resposta: ", resposta);
+        })
+        .catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+        });
+    }
     }
 </script>
 <script src="../js/redirecionamento.js"></script>

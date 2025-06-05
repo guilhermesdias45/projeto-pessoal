@@ -29,6 +29,29 @@ function buscarQuestao(req, res){
     });
 }
 
+function salvarResultado(req, res) {
+
+    var per1 = req.body.pergunta1;
+    var res1 = req.body.resposta1;
+    var idUsuario = req.body.idUsuario;
+
+        medidaModel.salvarResultado(per1, res1, idUsuario)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+}
+
 // function buscarMedidasEmTempoReal(req, res) {
 
 //     var idAquario = req.params.idAquario;
@@ -50,5 +73,6 @@ function buscarQuestao(req, res){
 
 module.exports = {
     buscarCategorias,
-    buscarQuestao
+    buscarQuestao,
+    salvarResultado
 }

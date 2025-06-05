@@ -17,6 +17,14 @@ function buscarQuestao(req, res) {
     return database.executar(instrucaoSql);
 }
 
+function salvarResultado(per1, res1, idUsuario) {
+
+    var instrucaoSql = `INSERT INTO Quizz (idPergunta, fkUsuario, acerto) VALUES (${per1}, ${idUsuario}, ${res1});`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 // function buscarMedidasEmTempoReal(idAquario) {
 
 //     var instrucaoSql = `SELECT 
@@ -34,5 +42,6 @@ function buscarQuestao(req, res) {
 module.exports = {
     buscarCategorias,
     // buscarMedidasEmTempoReal
-    buscarQuestao
+    buscarQuestao,
+    salvarResultado
 }
