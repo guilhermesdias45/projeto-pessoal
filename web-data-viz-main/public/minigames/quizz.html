@@ -174,7 +174,8 @@
 
 </html>
 <script>
-    const listaDeQuestoes = []
+    const listaDeQuestoes = [];
+    const todasPerguntas = [];
 
     // variáveis globais    
     let numeroDaQuestaoAtual = 0
@@ -214,11 +215,12 @@
                 resposta.json().then((perguntas) => {
                     let i = 0;
                     perguntas.forEach((pergunta) => {
-                        listaDeQuestoes.push(pergunta);
+                        todasPerguntas.push(pergunta);
 
-                        console.log(listaDeQuestoes[i]);
+                        console.log(todasPerguntas[i]);
                         i++;
                     });
+                    sortearPergunta();
                     quantidadeDeQuestoes = listaDeQuestoes.length;
                 });
             })
@@ -376,6 +378,28 @@
         // btnConcluir.disabled = true
         btnTentarNovamente.disabled = false
 
+    }
+
+    const perguntasEscolhidas = [];
+
+    function sortearPergunta(){
+        for(let i = 0; i < 10; i++){
+            let verificacao = false;
+
+            let sorteio = Number((Math.random() * todasPerguntas.length).toFixed());
+
+            for(let k = 0; k < perguntasEscolhidas.length; k++){
+                if(listaDeQuestoes[k].idPergunta == perguntasEscolhidas[k].idPergunta){
+                    verificacao = true;
+                    break;
+                }
+            }
+            if(sorteio >= 0 && sorteio <= (todasPerguntas.length - 1) && verificacao == false){
+                listaDeQuestoes.push(todasPerguntas[sorteio]);
+            } else { 
+                i--;
+            }
+        }
     }
 </script>
 <script src="../js/redirecionamento.js"></script>

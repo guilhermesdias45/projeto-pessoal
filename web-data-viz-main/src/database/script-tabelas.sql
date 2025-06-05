@@ -108,9 +108,27 @@ INSERT INTO Historico_Jogo (fkUsuario, fkJogo, data_hora, pontos_numero) VALUES
 
 INSERT INTO Quizz_Questao (pergunta, alternativaA, alternativaB, alternativaC, alternativaD, alternativaCorreta)
 VALUES
-	("Qual mês tem 30 dias?", "Janeiro", "Dezembro", "Junho", "Agosto", "alternativaC"),
-    ("Quantas horas tem em um dia?", "30 horas", "38 horas", "48 horas", "24 horas", "alternativaD"),
-    ("Qual destes números é ímpar?", "Dez", "Doze", "Oito", "Onze", "alternativaD");
-
-SELECT pergunta, alternativaA, alternativaB, alternativaC, alternativaD, alternativaCorreta
+    ("Em qual console foi lançado o jogo 'Super Mario 64'?", "PlayStation", "Nintendo 64", "Sega Saturn", "Dreamcast", "alternativaB"),
+    ("Qual o nome do protagonista da série 'The Legend of Zelda'?", "Zelda", "Ganondorf", "Link", "Samus", "alternativaC"),
+    ("No jogo 'Minecraft', qual é o recurso necessário para fazer tochas?", "Ferro", "Madeira e carvão", "Pedra", "Diamante", "alternativaB"),
+    ("No jogo 'Among Us', o que um impostor NÃO pode fazer?", "Sabotar", "Reportar corpos", "Fazer tarefas", "Matar tripulantes", "alternativaC"),
+    ("Qual é o nome do reino onde se passa a maior parte dos jogos da série 'Mario'?", "Hyrule", "Mushroom Kingdom", "Tamriel", "Kanto", "alternativaB"),
+    ("Qual desses é um famoso jogo de corrida da Nintendo?", "Need for Speed", "Forza Horizon", "Gran Turismo", "Mario Kart", "alternativaD"),
+    ("Qual destes jogos foi lançado primeiro?", "Doom (1993)", "Half-Life (1998)", "Quake (1996)", "Duke Nukem 3D (1996)", "alternativaA"),
+	("No universo de 'League of Legends', qual desses campeões é conhecido como 'O Curador das Florestas'?", "Maokai", "Zyra", "Ivern", "Soraka", "alternativaA"),
+    ("Qual o nome da cidade onde se passa 'Resident Evil 2'?", "Silent Hill", "Midgar", "Raccoon City", "Arkham", "alternativaC"),
+    ("Qual o nome do personagem principal do jogo indie 'Hollow Knight'?", "The Knight", "Hornet", "The Hollow", "Wanderer", "alternativaA"),
+	("Qual é o nome do vilão principal em muitos jogos da série 'Super Mario'?", "Wario", "Bowser", "Donkey Kong", "Luigi", "alternativaB"),
+    ("Em qual animal Sonic se transforma ao coletar todas as esmeraldas do caos?", "Lobo", "Raposa", "Ouriço dourado", "Coelho", "alternativaC"),
+    ("Qual é o nome do campeão considerado a 'Caçadora das Sombras' em League of Legends?", "Ahri", "Ashe", "Vayne", "Leona", "alternativaC"),
+    ("Qual é o nome da cidade fictícia onde se passa o jogo 'The Simpsons: Hit & Run'?", "Springfield", "Shelbyville", "Quahog", "South Park", "alternativaA"),
+    ("Em qual plataforma foi lançado o primeiro jogo do 'Sonic the Hedgehog'?", "Nintendo", "PlayStation", "Sega Genesis/Mega Drive", "Xbox", "alternativaC"),
+	("Em 'League of Legends', qual é o papel principal de Janna?", "Atiradora", "Mago de explosão", "Suporte", "Caçador", "alternativaC"),
+	("Em 'The Sims', o que acontece se você remover a escada da piscina enquanto um Sim está nadando?", "Ele aprende a nadar melhor", "Nada acontece", "Ele não consegue sair e pode morrer", "Ele vira um tubarão", "alternativaC"),
+	("Qual desses personagens não pertence ao universo de 'Super Smash Bros'?", "Kirby", "Samus", "Lara Croft", "Pikachu", "alternativaC"),
+    ("Em 'Minecraft', qual mob explode ao se aproximar do jogador?", "Esqueleto", "Zumbi", "Creeper", "Enderman", "alternativaC"),
+	("Em 'Pokémon', qual é o nome do vilão que lidera a Equipe Rocket?", "Brock", "Giovanni", "Ash", "James", "alternativaB"),
+	("Em 'Counter-Strike: Global Offensive', o que o time terrorista precisa fazer para vencer uma rodada?", "Salvar reféns", "Desarmar a bomba", "Plantá-la e fazê-la explodir", "Defender a base", "alternativaC"),
+	("Qual personagem é o mascote oficial da Nintendo?", "Sonic", "Mario", "Pikachu", "Link", "alternativaB");
+SELECT *
 FROM Quizz_Questao;

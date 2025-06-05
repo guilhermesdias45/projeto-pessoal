@@ -11,8 +11,7 @@ on c.idCategoria = u.categoria_favorita group by categoria_favorita;`;
 
 function buscarQuestao(req, res) {
 
-    var instrucaoSql = `SELECT pergunta, alternativaA, alternativaB, alternativaC, alternativaD, alternativaCorreta
-FROM Quizz_Questao;`;
+    var instrucaoSql = `SELECT * FROM Quizz_Questao;`;
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

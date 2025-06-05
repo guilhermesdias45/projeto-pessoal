@@ -29,7 +29,7 @@
           </li>
           <li>
             <a href="jogos.html">Jogos</a>
-        </li>
+          </li>
           <li>
             <a href="simulador.html">Simulador</a>
           </li>
@@ -195,10 +195,14 @@
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
         "(A e-mail precisa conter @)";
+      finalizarAguardar();
+      return false;
     } else if (senhaVar.length < 8 || charEspecial.test(senhaVar)) {
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
         "(A senha deve ter ao menos 8 caracteres)";
+      finalizarAguardar();
+      return false;
     } else {
       setInterval(sumirMensagem, 5000);
     }
