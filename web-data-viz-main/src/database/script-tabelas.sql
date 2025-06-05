@@ -48,13 +48,6 @@ CREATE TABLE Historico_Jogo (
   FOREIGN KEY (fkJogo) REFERENCES Jogo (idJogo)
   );
 
--- CREATE TABLE Quizz (
--- 	idPartida INT NOT NULL AUTO_INCREMENT,
---     qtdAcertos INT NOT NULL,
---     PRIMARY KEY (idPergunta),
---     FOREIGN KEY (fkJogo) REFERENCES Jogo(idJogo)
--- );
-
 CREATE TABLE Quizz_Questao (
 	idPergunta INT NOT NULL AUTO_INCREMENT,
     pergunta VARCHAR(200) NOT NULL,
@@ -64,6 +57,16 @@ CREATE TABLE Quizz_Questao (
     alternativaD VARCHAR(50) NOT NULL,
     alternativaCorreta VARCHAR(50) NOT NULL,
     PRIMARY KEY (idPergunta)
+);
+
+CREATE TABLE Quizz (
+ 	idPartida INT NOT NULL AUTO_INCREMENT,
+    idPergunta INT NOT NULL,
+	fkUsuario INT NOT NULL,
+    acerto INT NOT NULL,
+	PRIMARY KEY (idPartida, fkUsuario, idPergunta),
+    FOREIGN KEY (idPergunta) REFERENCES Quizz_Questao(idPergunta),
+    FOREIGN KEY (fkUsuario) REFERENCES Usuario(idUsuario)
 );
 
 -- ALTER TABLE Usuario ADD FOREIGN KEY (fkGuilda) REFERENCES Guilda (idGuilda);
@@ -96,15 +99,10 @@ INSERT INTO Usuario (nome, username, email, senha, categoria_favorita) VALUES
 select * from Usuario;
 
 INSERT INTO Jogo (idJogo, nome, link, fkCategoria) VALUES
-(1, 'BattleQuest', 'https://bq.com', 1),
-(2, 'CodeRun', 'https://coderun.io', 2),
-(3, 'Floresta Mística', 'https://florestamistica.net', 3);
+(1, 'Quizz', '#', 18),
+(2, 'Sudoku', '#', 18);
 
-INSERT INTO Historico_Jogo (fkUsuario, fkJogo, data_hora, pontos_numero) VALUES
-(1, 1, '2025-05-17 15:00', '8500'),
-(1, 2, '2025-05-17 17:30', '7300'),
-(2, 1, '2025-05-16 14:20', '9100'),
-(3, 3, '2025-05-16 19:10', '6800');
+select * from Quizz;
 
 INSERT INTO Quizz_Questao (pergunta, alternativaA, alternativaB, alternativaC, alternativaD, alternativaCorreta)
 VALUES
@@ -130,5 +128,8 @@ VALUES
 	("Em 'Pokémon', qual é o nome do vilão que lidera a Equipe Rocket?", "Brock", "Giovanni", "Ash", "James", "alternativaB"),
 	("Em 'Counter-Strike: Global Offensive', o que o time terrorista precisa fazer para vencer uma rodada?", "Salvar reféns", "Desarmar a bomba", "Plantá-la e fazê-la explodir", "Defender a base", "alternativaC"),
 	("Qual personagem é o mascote oficial da Nintendo?", "Sonic", "Mario", "Pikachu", "Link", "alternativaB");
-SELECT *
-FROM Quizz_Questao;
+
+INSERT INTO Quizz (idPergunta, fkUsuario, acerto) VALUES
+(1, 1, 0);
+
+SELECT * FROM Quizz;
