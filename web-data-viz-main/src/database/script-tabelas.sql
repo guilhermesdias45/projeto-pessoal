@@ -89,9 +89,9 @@ INSERT INTO Categoria (nome, descricao) VALUES
 ("Puzzle", "Jogos que desafiam o raciocínio lógico, a percepção espacial ou a memória, exigindo a solução de quebra-cabeças ou problemas.");
 
 INSERT INTO Usuario (nome, username, email, senha, categoria_favorita) VALUES
-('Ana Silva', 'anas', 'ana@email.com', '123senha', 1),
-('Bruno Costa', 'brunoc', 'bruno@email.com', 'abc123', 2),
-('Carla Mendes', 'carlam', 'carla@email.com', 'passcarla', 3);
+('Ana Silva', 'anas', 'ana@email.com', '123@senha', 1),
+('Bruno Costa', 'brunoc', 'bruno@email.com', 'abc@12345', 2),
+('Carla Mendes', 'carlam', 'carla@email.com', 'passcarla!', 3);
 
 select * from Usuario;
 
@@ -127,6 +127,6 @@ VALUES
 	("Qual personagem é o mascote oficial da Nintendo?", "Sonic", "Mario", "Pikachu", "Link", "alternativaB");
 
 INSERT INTO Quizz (idPergunta, fkUsuario, acerto) VALUES
-(1, 1, 0);
+(10, 1, 0);
 
 SELECT * FROM Quizz;
