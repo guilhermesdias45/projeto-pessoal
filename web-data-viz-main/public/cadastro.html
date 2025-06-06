@@ -195,7 +195,7 @@
     } else if (senhaVar.length < 8 || !(charEspecial.test(senhaVar))) {
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
-        "(A senha deve ter ao menos 8 caracteres)";
+        "(A senha deve ter ao menos 8 caracteres e catactéres especiais)";
       finalizarAguardar();
       return false;
     } else {
