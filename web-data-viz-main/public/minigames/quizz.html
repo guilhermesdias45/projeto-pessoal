@@ -212,12 +212,8 @@
         })
             .then(function (resposta) {
                 resposta.json().then((perguntas) => {
-                    let i = 0;
                     perguntas.forEach((pergunta) => {
                         todasPerguntas.push(pergunta);
-
-                        console.log(todasPerguntas[i]);
-                        i++;
                     });
                     sortearPergunta();
                     quantidadeDeQuestoes = listaDeQuestoes.length;
@@ -384,18 +380,12 @@
 
     function sortearPergunta() {
         for (let i = 0; i < 10; i++) {
-            let verificacao = false;
-
+            contador++;
             let sorteio = Number((Math.random() * todasPerguntas.length).toFixed());
 
-            for (let k = 0; k < perguntasEscolhidas.length; k++) {
-                if (listaDeQuestoes[k].idPergunta == perguntasEscolhidas[k].idPergunta) {
-                    verificacao = true;
-                    break;
-                }
-            }
-            if (sorteio >= 0 && sorteio <= (todasPerguntas.length - 1) && verificacao == false) {
+            if (sorteio >= 0 && sorteio <= (todasPerguntas.length - 1)) {
                 listaDeQuestoes.push(todasPerguntas[sorteio]);
+                todasPerguntas.splice(sorteio, 1);
             } else {
                 i--;
             }
