@@ -37,9 +37,18 @@ function buscarResultados(idUsuario) {
     return database.executar(instrucaoSql);
 }
 
+function buscarTodosResultados(){
+    var instrucaoSql = `select u.nome,sum(q.acerto = 1) acertos, count(*) perguntas_respondidas
+from Quizz q inner join Usuario u on u.idUsuario = q.fkUsuario group by fkUsuario;`;
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     buscarCategorias,
     buscarQuestao,
     salvarResultado,
-    buscarResultados
+    buscarResultados,
+    buscarTodosResultados
 }

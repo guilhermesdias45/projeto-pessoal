@@ -22,5 +22,9 @@ router.post("/salvar", function (req, res){
 router.get("/buscarResultados/:idPerfil", function (req, res){
     medidaController.buscarResultados(req, res);
 });
+
+router.get("/buscarTodosResultados", function (req, res){
+    medidaController.buscarTodosResultados(req, res);
+});
     
 module.exports = router;

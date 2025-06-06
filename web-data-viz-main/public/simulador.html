@@ -96,16 +96,15 @@
           <p><b>Categoria(s) mais votada(s): </b> <span id="categ_mais_votada"></span></p>
         </div>
 
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium tempora architecto sint fugit
-          dolorum? Ipsum laborum magnam similique labore, voluptate amet reprehenderit rem ab blanditiis quisquam
-          laboriosam eaque alias. Reiciendis. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-          Accusantium tempora architecto sint fugit dolorum? Ipsum laborum magnam similique labore, voluptate amet
-          reprehenderit rem ab blanditiis quisquam laboriosam eaque alias. Reiciendis.</p>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium tempora architecto sint fugit
-          dolorum? Ipsum laborum magnam similique labore, voluptate amet reprehenderit rem ab blanditiis quisquam
-          laboriosam eaque alias. Reiciendis. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-          Accusantium tempora architecto sint fugit dolorum? Ipsum laborum magnam similique labore, voluptate amet
-          reprehenderit rem ab blanditiis quisquam laboriosam eaque alias. Reiciendis.</p>
+        <div>
+          <p><b>Jogador com maior porcentagem de acertos no Quizz: <span id="jogador_mais_acertos"></span></b></p>
+        </div>
+
+        <div>
+          <p><b>Jogador com maior quantidade de perguntas respondidas no Quizz: <span id="jogador_mais_partidas"></span></b></p>
+        </div>
+
+        
 
       </div>
     </div>
@@ -131,6 +130,7 @@
 
   function iniciar() {
     listarCategorias();
+    buscarMaisAcertos();
   }
 
   function listarCategorias() {
@@ -145,7 +145,7 @@
             totalVotos += conta.contagem;
           });
           plotarGraficoPorCento();
-          gerarDashboard();
+          gerarDashboardCategoria();
 
           CategoriasKPI();
         });
@@ -155,7 +155,7 @@
       });
   }
 
-  function gerarDashboard() {
+  function gerarDashboardCategoria() {
 
     const ctxDonut = document.getElementById('donut').getContext('2d');
 
@@ -214,6 +214,58 @@
     }
 
   }
-</script>
 
+  const Usuarios = [];
+
+  function buscarMaisAcertos(){
+    fetch(`/medidas/buscarTodosResultados`, {
+      method: "GET",
+    })
+    .then(function (resposta) {
+      resposta.json().then((conta) => {
+        conta.forEach((respostas) => {
+          let objeto = {
+            'nome': respostas.nome,
+            'acertos': respostas.acertos,
+            'qtdPerguntas': respostas.perguntas_respondidas
+          }
+          Usuarios.push(objeto)
+        });
+        maiorPorcentagemAcerto();
+        maiorQuantidadeTentativas();
+      });
+    })
+    .catch(function (resposta) {
+      console.log(`#ERRO: ${resposta}`);
+    });
+  }
+
+  function maiorPorcentagemAcerto(){
+    let maiorPorcent = 0;
+    let indiceUsuario = 0;
+    for(let n = 0; n < Usuarios.length; n++){
+      let porCent = Number(Usuarios[n].acertos) / Number(Usuarios[n].qtdPerguntas) * 100;
+      if(porCent > maiorPorcent){
+        maiorPorcent = porCent;
+        indiceUsuario = n;
+      }
+    }
+
+    jogador_mais_acertos.innerHTML = `${Usuarios[indiceUsuario].nome}, com ${maiorPorcent}% de acerto!`;
+  }
+
+  function maiorQuantidadeTentativas(){
+    let maiorQtd = 0;
+    let indiceUsuario = 0;
+    for(let n = 0; n < Usuarios.length; n++){
+      let qtd = Number(Usuarios[n].qtdPerguntas);
+      if(qtd > maiorQtd){
+        maiorQtd = qtd;
+        indiceUsuario = n;
+      }
+    }
+
+    jogador_mais_partidas.innerHTML = `${Usuarios[indiceUsuario].nome}, com ${maiorQtd} tentativas!`;
+  }
+</script>
 <script src="js/redirecionamento.js"></script>
