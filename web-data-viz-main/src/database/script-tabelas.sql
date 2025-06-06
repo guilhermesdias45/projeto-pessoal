@@ -15,7 +15,6 @@ CREATE TABLE Usuario (
   email VARCHAR(45) NOT NULL UNIQUE,
   senha VARCHAR(25) NOT NULL,
   categoria_favorita int NOT NULL,
---   fkGuilda INT NULL,
   PRIMARY KEY (idUsuario),
   FOREIGN KEY (categoria_favorita) REFERENCES Categoria(idCategoria));
 
@@ -68,8 +67,6 @@ CREATE TABLE Quizz (
     FOREIGN KEY (idPergunta) REFERENCES Quizz_Questao(idPergunta),
     FOREIGN KEY (fkUsuario) REFERENCES Usuario(idUsuario)
 );
-
--- ALTER TABLE Usuario ADD FOREIGN KEY (fkGuilda) REFERENCES Guilda (idGuilda);
 
 INSERT INTO Categoria (nome, descricao) VALUES
 ("RPG", "Jogos onde o jogador assume o papel de um personagem, evolui suas habilidades e explora narrativas complexas, geralmente com escolhas que afetam o enredo"),

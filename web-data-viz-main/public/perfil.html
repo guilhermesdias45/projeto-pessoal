@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 
-<body onload="buscarInformacoes(), dashboardsAcertosErros()">
+<body onload="buscarInformacoes(), dashboardsAcertosErros(idPerfil)">
 
   <div id="pagina">
 
@@ -90,8 +90,8 @@
           <p>Username: <br><span id="username"></span></p>
           <p>Categoria de jogos favorita: <br><span id="categoria"></span></p>
           <div>
-            <p>Melhores pontuações:<br><span id="historico_partidas">Não há histórico de jogos no momento.</span></p>
-            <div style="width: 100%; height: 100%; margin: auto;">
+            <p>Melhores pontuações:<br><span id="historico_partidas">Não há histórico para recarregar no momento.</span></p>
+            <div class="donut_config">
               <canvas id="donut"></canvas>
             </div>
           </div>
@@ -112,6 +112,8 @@
 
 </html>
 <script>
+  let idPerfil = sessionStorage.ID_USUARIO;
+
   let acertos = 0;
   let erros = 0;
   let tentativas = 0;
@@ -124,62 +126,6 @@
       historico_partidas.innerHTML = `Não há histórico para recarregar no momento.`;
     }
   }
-
-  function dashboardsAcertosErros() {
-    let idPerfil = sessionStorage.ID_USUARIO;
-
-    console.log(idPerfil);
-
-    fetch(`/medidas/buscarResultados/${idPerfil}`, {
-      method: "GET",
-    })
-      .then(function (resposta) {
-        resposta.json().then((conta) => {
-          conta.forEach((acertosErros) => {
-            acertos += acertosErros.certo;
-            erros += acertosErros.errado;
-
-            tentativas += acertosErros.certo;
-            tentativas += acertosErros.errado;
-          });
-          gerarDashboard();
-        });
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
-  }
-
-  function gerarDashboard() {
-    if(tentativas > 0){
-      historico_partidas.innerHTML = ``;
-      
-      const ctxDonut = document.getElementById('donut').getContext('2d');
-
-    let myChart = new Chart(ctxDonut, {
-      type: 'doughnut',
-      data: {
-        labels: ['Acertos', 'Erros'],
-        datasets: [{
-          data: [(acertos/tentativas *100), (erros/tentativas *100)],
-          backgroundColor: ['green', 'red'],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: 'bottom'
-          },
-          title: {
-            display: true,
-            text: 'Quizz Resultados: (%)',
-          }
-        }
-      }
-    });
-  }
-}
 </script>
+<script src="js/dashboard.js"></script>
 <script src="js/redirecionamento.js"></script>
