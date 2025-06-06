@@ -18,15 +18,6 @@ CREATE TABLE Usuario (
   PRIMARY KEY (idUsuario),
   FOREIGN KEY (categoria_favorita) REFERENCES Categoria(idCategoria));
 
-CREATE TABLE Amizade (
-  idUsuario1 INT NOT NULL,
-  idUsuario2 INT NOT NULL,
-  usuario1Amizade TINYINT NOT NULL,
-  usuario2Amizade TINYINT NOT NULL,
-  PRIMARY KEY (idUsuario1, idUsuario2),
-  FOREIGN KEY (idUsuario1) REFERENCES Usuario (idUsuario),
-  FOREIGN KEY (idUsuario2) REFERENCES Usuario (idUsuario));
-
 CREATE TABLE Jogo (
   idJogo INT NOT NULL,
   nome VARCHAR(45) NULL UNIQUE,
